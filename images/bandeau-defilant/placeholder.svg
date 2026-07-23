@@ -1,0 +1,11 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 400">
+  <rect width="400" height="400" fill="#F7F0DF"/>
+  <rect x="12" y="12" width="376" height="376" rx="24" fill="none" stroke="#8FA876" stroke-width="3" stroke-dasharray="10 8"/>
+  <circle cx="200" cy="165" r="70" fill="#ECE3C8" stroke="#6B2A31" stroke-width="3"/>
+  <circle cx="175" cy="145" r="7" fill="#6B2A31"/>
+  <circle cx="225" cy="150" r="6" fill="#6B2A31"/>
+  <circle cx="205" cy="185" r="8" fill="#6B2A31"/>
+  <circle cx="165" cy="185" r="5" fill="#6B2A31"/>
+  <circle cx="230" cy="190" r="5" fill="#6B2A31"/>
+  <text x="200" y="275" font-family="Georgia, serif" font-size="22" fill="#6B2A31" text-anchor="middle" font-style="italic">Photo à venir</text>
+</svg>
