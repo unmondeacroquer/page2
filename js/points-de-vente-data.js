@@ -30,7 +30,7 @@ const POINTS_DE_VENTE = [
   },
   {
     nom: "Vrac et Compagnie",
-    ville: "Sutton Jonction",
+    ville: "Sutton",
     adresse: "À compléter",
     telephone: "",
     siteWeb: ""
