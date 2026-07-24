@@ -26,7 +26,7 @@
    ========================================================================= */
 
 const BANDEAU = [
-  // Exemple une fois tes photos ajoutées :
+  
   "images/bandeau-defilant/piano.jpg",
   "images/bandeau-defilant/2filles.jpg",
   "images/bandeau-defilant/yeux.jpg",
