@@ -5,16 +5,16 @@
 
 :root {
   /* Couleurs */
-  --cream: #F7F0DF;
-  --cream-deep: #ECE3C8;
+  --cream: #EDE8D5;
+  --cream-deep: #E1DBC1;
   --white: #FFFDF8;
-  --maroon: #6B2A31;
-  --maroon-dark: #4A1D22;
+  --maroon: #9C3031;
+  --maroon-dark: #7C1A21;
   --ink: #3B2418;
-  --terracotta: #B23A2E;
-  --terracotta-dark: #8F2A20;
-  --sage: #8FA876;
-  --sage-dark: #5F7A52;
+  --terracotta: #9C3031;
+  --terracotta-dark: #7C1A21;
+  --sable: #D8996E;
+  --bourgogne: #7C1A21;
 
   /* Typographie */
   --font-display: "Fraunces", Georgia, serif;
@@ -59,7 +59,7 @@ h1, h2, h3 {
   letter-spacing: 0.14em;
   text-transform: uppercase;
   font-size: 0.78rem;
-  color: var(--sage-dark);
+  color: var(--bourgogne);
 }
 
 .accent { color: var(--terracotta); }
@@ -119,7 +119,7 @@ h1, h2, h3 {
 }
 
 :focus-visible {
-  outline: 3px solid var(--sage-dark);
+  outline: 3px solid var(--bourgogne);
   outline-offset: 3px;
 }
 
@@ -153,7 +153,7 @@ h1, h2, h3 {
 .site-header .brand img {
   width: 42px;
   height: 42px;
-  border-radius: 50%;
+  border-radius: var(--radius-s);
   object-fit: cover;
   background: var(--cream-deep);
 }
@@ -201,7 +201,7 @@ h1, h2, h3 {
   overflow: hidden;
   padding: clamp(50px, 8vw, 90px) 24px clamp(90px, 12vw, 150px);
   text-align: center;
-  background: linear-gradient(180deg, var(--cream) 0%, var(--cream) 60%, #EFE7CD 100%);
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream) 60%, var(--cream-deep) 100%);
 }
 
 .hero-landscape {
@@ -221,19 +221,31 @@ h1, h2, h3 {
 }
 
 .hero-mascot {
-  width: clamp(120px, 18vw, 190px);
-  margin: 0 auto 6px;
+  width: clamp(230px, 30vw, 400px);
+  margin: 0 auto 8px;
   animation: bob 4.5s ease-in-out infinite;
-  filter: drop-shadow(0 14px 18px rgba(74, 29, 34, 0.18));
+  filter: drop-shadow(0 16px 22px rgba(74, 29, 34, 0.18));
 }
 
 .hero-mascot img {
-  border-radius: 50%;
+  border-radius: var(--radius-m);
+}
+
+.visually-hidden {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border: 0;
 }
 
 @keyframes bob {
-  0%, 100% { transform: translateY(0) rotate(-1.5deg); }
-  50% { transform: translateY(-10px) rotate(1.5deg); }
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-10px); }
 }
 
 .hero h1 {
@@ -338,11 +350,11 @@ section { padding: var(--section-pad) 0; }
   scroll-snap-type: x mandatory;
   padding: 6px 6px 18px;
   scrollbar-width: thin;
-  scrollbar-color: var(--sage) transparent;
+  scrollbar-color: var(--sable) transparent;
 }
 
 .carousel-track::-webkit-scrollbar { height: 8px; }
-.carousel-track::-webkit-scrollbar-thumb { background: var(--sage); border-radius: 8px; }
+.carousel-track::-webkit-scrollbar-thumb { background: var(--sable); border-radius: 8px; }
 
 .cookie-card {
   scroll-snap-align: start;
@@ -399,12 +411,12 @@ section { padding: var(--section-pad) 0; }
   letter-spacing: 0.03em;
   padding: 5px 10px;
   border-radius: 999px;
-  border: 1.5px solid var(--sage-dark);
-  color: var(--sage-dark);
-  background: rgba(143, 168, 118, 0.1);
+  border: 1.5px solid var(--bourgogne);
+  color: var(--bourgogne);
+  background: rgba(216, 153, 110, 0.16);
 }
 
-.tag.gluten { border-color: var(--terracotta); color: var(--terracotta-dark); background: rgba(178,58,46,0.08); }
+.tag.gluten { border-color: var(--terracotta); color: var(--terracotta-dark); background: rgba(156,48,49,0.08); }
 
 .carousel-arrows {
   display: flex;
@@ -477,7 +489,7 @@ section { padding: var(--section-pad) 0; }
 .pdv-info .pdv-ville {
   font-size: 0.85rem;
   font-weight: 700;
-  color: var(--sage-dark);
+  color: var(--bourgogne);
   text-transform: uppercase;
   letter-spacing: 0.04em;
 }
@@ -527,6 +539,7 @@ section { padding: var(--section-pad) 0; }
   margin: 0 auto 14px;
   border-radius: 50%;
   background: var(--white);
+  border: 2px solid var(--sable);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -570,7 +583,7 @@ section { padding: var(--section-pad) 0; }
 .footer-brand img {
   width: 58px;
   height: 58px;
-  border-radius: 50%;
+  border-radius: var(--radius-s);
 }
 
 .footer-brand .brand-text h3 {
