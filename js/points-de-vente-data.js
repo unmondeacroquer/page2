@@ -24,16 +24,16 @@ const POINTS_DE_VENTE = [
   {
     nom: "L'Échappée Belle",
     ville: "Sutton",
-    adresse: "À compléter",
-    telephone: "",
-    siteWeb: ""
+    adresse: "8 Rue Principale S, Sutton, QC J0E 2K0",
+    telephone: "+1(450)538-0139",
+    siteWeb: "lechappeebellesutton.ca"
   },
    {
     nom: "L'Art des Possibles",
     ville: "Sutton",
-    adresse: "À compléter",
-    telephone: "",
-    siteWeb: ""
+    adresse: "4 Rue du Dépôt, Sutton, QC J0E 2K0",
+    telephone: "+1(450)538-2002",
+    siteWeb: "lartdespossibles.ca"
   },
   {
     nom: "Vrac et Compagnie",
