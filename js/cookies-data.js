@@ -36,9 +36,9 @@
 
 const COOKIES = [
   {
-    nom: "Traditionnel",
-    description: "Le classique aux brisures de chocolat, comme à la maison.",
-    image: "images/cookies/traditionnel.jpg",
+    nom: "Matcha",
+    description: "Matcha et amandes caramélisées.",
+    image: "images/cookies/matcha.jpg",
     sansGluten: true,
     vegan: true,
     sansLactose: true
@@ -46,39 +46,55 @@ const COOKIES = [
   {
     nom: "Triple chocolat",
     description: "Pour les vrais gourmands de chocolat, sans compromis.",
-    image: "images/cookies/triple-chocolat.jpg",
+    image: "images/cookies/3choco.jpg",
     sansGluten: true,
     vegan: true,
     sansLactose: true
   },
   {
     nom: "Cœur tendre",
-    description: "Un cœur fondant à la confiture, glacé au sucre.",
-    image: "images/cookies/coeur-tendre.jpg",
+    description: "Un cœur fondant de brownie dans un cookie extra.",
+    image: "images/cookies/coeurtendre.jpg",
     sansGluten: true,
     vegan: false,
-    sansLactose: false
+    sansLactose: true
   },
   {
     nom: "Cœur Sapin",
-    description: "Édition des fêtes, glaçage vert et une pointe de vanille.",
-    image: "images/cookies/coeur-sapin.jpg",
+    description: "Edition spéciale, coeur sapin et petits fruits rouge.",
+    image: "images/cookies/sapin.jpg",
     sansGluten: true,
     vegan: false,
-    sansLactose: false
+    sansLactose: true
   },
   {
     nom: "Choco grenoble",
     description: "Chocolat, noix de Grenoble et une touche de sel de mer.",
-    image: "images/cookies/choco-grenoble.jpg",
+    image: "images/cookies/chocogrenoble.jpg",
     sansGluten: true,
     vegan: true,
     sansLactose: true
   },
   {
-    nom: "Matcha",
-    description: "Thé vert matcha et pépites de chocolat blanc.",
-    image: "images/cookies/matcha.jpg",
+    nom: "Feu de camp",
+    description: "Le smoorthe revisité",
+    image: "images/cookies/deudecamp.jpg",
+    sansGluten: true,
+    vegan: false,
+    sansLactose: false
+  },
+   {
+    nom: "Aloa",
+    description: "inspiré d'Hawaii, coco et ananas",
+    image: "images/cookies/aloa.jpg",
+    sansGluten: true,
+    vegan: false,
+    sansLactose: false
+  },
+   {
+    nom: "triplecacao",
+    description: "Cacao, chocolat noir, eclat de cacao",
+    image: "images/cookies/triplecacao.jpg",
     sansGluten: true,
     vegan: false,
     sansLactose: false
