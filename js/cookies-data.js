@@ -77,8 +77,8 @@ const COOKIES = [
   },
   {
     nom: "Feu de camp",
-    description: "Le smoorthe revisité",
-    image: "images/cookies/deudecamp.jpg",
+    description: "Le smores revisité",
+    image: "images/cookies/feudecamp.jpg",
     sansGluten: true,
     vegan: false,
     sansLactose: false
