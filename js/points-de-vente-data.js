@@ -29,6 +29,13 @@ const POINTS_DE_VENTE = [
     siteWeb: ""
   },
   {
+    nom: "L'Art des Possibles",
+    ville: "Sutton",
+    adresse: "À compléter",
+    telephone: "",
+    siteWeb: ""
+  },
+   {
     nom: "Vrac et Compagnie",
     ville: "Sutton",
     adresse: "À compléter",
