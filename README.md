@@ -70,15 +70,33 @@ et `href="https://instagram.com/"` par les vraies adresses de vos pages.
 index.html                       → la page (contenu et structure)
 CNAME                            → ton domaine personnalisé (ne pas supprimer)
 css/style.css                    → toutes les couleurs, polices, mises en page
+fonts/                           → les polices officielles de la marque (Mavericks,
+                                    Recoleta, Brandon Grotesque) — licence propriétaire
 js/main.js                       → fait fonctionner le site (ne pas modifier)
 js/cookies-data.js               → LISTE DES BISCUITS — à modifier
 js/points-de-vente-data.js       → LISTE DES POINTS DE VENTE — à modifier
 js/bandeau-data.js               → LISTE DES PHOTOS DU BANDEAU — à modifier
-images/logo.jpg                  → ton logo
+images/logo-hero.png             → logo horizontal avec slogan (page d'accueil)
+images/logo-header.png           → logo principal, rouge (en-tête)
+images/logo-footer.png           → logo principal avec slogan, crème (pied de page)
+images/logo-signature.png        → signature texte seule (favicon)
+images/icons/                    → icônes amour / artisanal / sans gluten (rouge et crème)
 images/carte-points-de-vente.jpg → la carte de l'Estrie
 images/cookies/                  → dépose ici tes photos de biscuits
 images/bandeau-defilant/         → dépose ici tes photos du bandeau
 ```
+
+## Note sur les polices
+
+Les fichiers de polices (Mavericks, Recoleta, Brandon Grotesque) sont
+intégrés directement dans le site pour qu'elles s'affichent chez tous
+les visiteurs sans installation. Tu m'as indiqué avoir une licence pour
+les utiliser — un seul point à vérifier de ton côté : certaines licences
+de polices (Monotype, notamment) distinguent l'usage "bureautique/print"
+de l'usage "web embedding" (le fait d'héberger le fichier sur un site
+pour qu'il soit téléchargé par les navigateurs). Un fichier de licence
+Monotype était inclus avec Mavericks — vaut la peine d'un coup d'œil
+rapide pour confirmer que ta licence couvre bien ce cas d'usage.
 
 ## Prochaine étape : passage en site marchand
 
