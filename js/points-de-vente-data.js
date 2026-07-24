@@ -26,41 +26,42 @@ const POINTS_DE_VENTE = [
     ville: "Sutton",
     adresse: "8 Rue Principale S, Sutton, QC J0E 2K0",
     telephone: "+1(450)538-0139",
-    siteWeb: "lechappeebellesutton.ca"
+    siteWeb: "http://www.lechappeebellesutton.ca"
   },
    {
     nom: "L'Art des Possibles",
     ville: "Sutton",
     adresse: "4 Rue du Dépôt, Sutton, QC J0E 2K0",
     telephone: "+1(450)538-2002",
-    siteWeb: "lartdespossibles.ca"
+    siteWeb: "http://www.lartdespossibles.ca"
   },
   {
     nom: "Vrac et Compagnie",
     ville: "Sutton",
-    adresse: "À compléter",
-    telephone: "",
-    siteWeb: ""
+    adresse: "1057 Chem. de la Vallée, Sutton, QC J0E 2K0",
+    telephone: "+1(450)525-5380",
+    siteWeb: "http://www.vracetcompagnie.ca/"
   },
   {
-    nom: "Verveine",
+    nom: "Verveine & Cie",
     ville: "Cowansville",
-    adresse: "À compléter",
-    telephone: "",
-    siteWeb: ""
+    adresse: "101 Rue Albert, Cowansville, QC J2K 2W4",
+    telephone: "+1(450)266-4242",
+    siteWeb: "http://www.verveineetcie.com/"
   },
   {
     nom: "L'Épicerie Futée",
     ville: "Bromont",
-    adresse: "À compléter",
-    telephone: "",
-    siteWeb: ""
-  },
-  {
-    nom: "Virgin Hill Café",
-    ville: "Foster (Lac-Brome)",
-    adresse: "À compléter",
-    telephone: "",
-    siteWeb: ""
+    adresse: "35 Rue John-Savage Local 105, Bromont, Quebec J2L 0A5",
+    telephone: "+1(450)534-3197",
+    siteWeb: "https://www.epiceriefutee.com/"
   }
+  // ,
+ // {
+ //   nom: "Brûlerie Virgin Hill Coffee",
+ //   ville: "Foster (Lac-Brome)",
+ //   adresse: "770 Chem. Lakeside, Foster, QC J0E 1R0",
+ //   telephone: "+1(800)516-8422",
+ //   siteWeb: "https://www.virginhillcoffee.com"
+ // }
 ];
