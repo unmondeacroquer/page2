@@ -1,7 +1,48 @@
 /* =========================================================================
    UN MONDE À CROQUER — style.css
    Tokens extraits du logo et de la maquette de marque.
+   Polices officielles fournies par la cliente (licence propriétaire).
    ========================================================================= */
+
+@font-face {
+  font-family: "Mavericks";
+  src: url("../fonts/MavericksRegular.otf") format("opentype");
+  font-weight: 400;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Recoleta";
+  src: url("../fonts/Recoleta-SemiBold.ttf") format("truetype");
+  font-weight: 600;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("../fonts/BrandonGrotesque-Light.otf") format("opentype");
+  font-weight: 300;
+  font-style: normal;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("../fonts/BrandonGrotesque-LightItalic.otf") format("opentype");
+  font-weight: 300;
+  font-style: italic;
+  font-display: swap;
+}
+
+@font-face {
+  font-family: "Brandon Grotesque";
+  src: url("../fonts/BrandonGrotesque-RegularItalic.otf") format("opentype");
+  font-weight: 400;
+  font-style: italic;
+  font-display: swap;
+}
 
 :root {
   /* Couleurs */
@@ -16,9 +57,10 @@
   --sable: #D8996E;
   --bourgogne: #7C1A21;
 
-  /* Typographie */
-  --font-display: "Fraunces", Georgia, serif;
-  --font-body: "Nunito", -apple-system, sans-serif;
+  /* Typographie — polices officielles de la marque */
+  --font-display: "Mavericks", Georgia, serif;       /* titres */
+  --font-subtitle: "Recoleta", Georgia, serif;        /* sous-titres */
+  --font-body: "Brandon Grotesque", -apple-system, sans-serif; /* texte courant */
 
   /* Rythme */
   --radius-s: 10px;
@@ -46,11 +88,18 @@ img { max-width: 100%; display: block; }
 
 a { color: inherit; }
 
-h1, h2, h3 {
+h1, h2 {
   font-family: var(--font-display);
   color: var(--maroon);
   margin: 0;
   line-height: 1.08;
+}
+
+h3 {
+  font-family: var(--font-subtitle);
+  color: var(--maroon);
+  margin: 0;
+  line-height: 1.15;
 }
 
 .eyebrow {
@@ -219,8 +268,8 @@ h1, h2, h3 {
 }
 
 .hero-mascot {
-  width: clamp(230px, 30vw, 400px);
-  margin: 0 auto 8px;
+  width: clamp(260px, 42vw, 560px);
+  margin: 0 auto 28px;
 }
 
 .hero-mascot img {
@@ -240,21 +289,20 @@ h1, h2, h3 {
   border: 0;
 }
 
-.hero h1 {
-  font-size: clamp(2.4rem, 6vw, 3.6rem);
-  font-weight: 600;
+.hero-icons {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: clamp(20px, 5vw, 44px);
+  list-style: none;
+  margin: 0 0 32px;
+  padding: 0;
 }
 
-.hero .tagline {
-  font-family: var(--font-display);
-  font-style: italic;
-  font-size: clamp(1.1rem, 2.4vw, 1.4rem);
-  color: var(--ink);
-  margin: 14px 0 30px;
-}
-
-.hero .tagline .heart {
-  color: var(--terracotta);
+.hero-icons img {
+  width: clamp(46px, 7vw, 68px);
+  height: clamp(46px, 7vw, 68px);
+  object-fit: contain;
 }
 
 /* -------------------------------------------------------------------------
@@ -470,7 +518,7 @@ section { padding: var(--section-pad) 0; }
 .pdv-info strong {
   display: block;
   color: var(--maroon);
-  font-family: var(--font-display);
+  font-family: var(--font-subtitle);
   font-size: 1.05rem;
 }
 
@@ -564,32 +612,32 @@ section { padding: var(--section-pad) 0; }
 
 .footer-brand {
   display: flex;
-  align-items: center;
-  gap: 14px;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 18px;
 }
 
-.footer-brand img {
-  width: 58px;
-  height: 58px;
+.footer-brand img.footer-logo {
+  width: clamp(150px, 16vw, 190px);
+  height: auto;
+}
+
+.footer-icons {
+  display: flex;
+  gap: 16px;
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+
+.footer-icons img {
+  width: 30px;
+  height: 30px;
   object-fit: contain;
 }
 
-.footer-brand .brand-text h3 {
-  color: var(--cream);
-  font-size: 1.3rem;
-  margin-bottom: 2px;
-}
-
-.footer-brand .brand-text p {
-  margin: 0;
-  font-style: italic;
-  font-family: var(--font-display);
-  opacity: 0.85;
-  font-size: 0.92rem;
-}
-
 .footer-contact h4 {
-  font-family: var(--font-display);
+  font-family: var(--font-subtitle);
   color: var(--cream);
   font-size: 1.05rem;
   margin: 0 0 14px;
