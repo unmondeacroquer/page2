@@ -27,7 +27,9 @@
 
 const BANDEAU = [
   // Exemple une fois tes photos ajoutées :
-  // "images/bandeau-defilant/atelier-01.jpg",
-  // "images/bandeau-defilant/biscuits-marche.jpg",
-  // "images/bandeau-defilant/portrait-01.jpg",
+  "images/bandeau-defilant/piano.jpg",
+  "images/bandeau-defilant/2filles.jpg",
+  "images/bandeau-defilant/yeux.jpg",
+  "images/bandeau-defilant/precieux.jpg",
+  "images/bandeau-defilant/yeuxdeb.jpg",
 ];
