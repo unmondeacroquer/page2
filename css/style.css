@@ -422,7 +422,13 @@ h3 {
 
 @keyframes scroll-left {
   from { transform: translateX(0); }
-  to { transform: translateX(-50%); }
+  /* La distance exacte du décalage (--bandeau-shift) est calculée en JS
+     dans js/main.js, car un simple "-50%" n'est plus assez précis depuis
+     qu'il y a un espacement (gap) entre les photos — 50% du double
+     contenu n'atterrit pas exactement au bon endroit avec un espacement.
+     Le "50%" ci-dessous n'est qu'une valeur de secours, remplacée en
+     pratique par la variable calculée avant même le premier affichage. */
+  to { transform: translateX(calc(-1 * var(--bandeau-shift, 50%))); }
 }
 
 .bandeau:hover .bandeau-track { animation-play-state: paused; } /* pause le défilement au survol de la souris */
