@@ -256,6 +256,16 @@
 </footer>
 
 <!-- =========================================================================
+     VISIONNEUSE PLEIN ÉCRAN (lightbox) — s'ouvre au clic sur une photo de
+     biscuit ou du bandeau défilant. Reste cachée (attribut "hidden")
+     jusqu'à ce que js/main.js l'active. Ne rien modifier ici.
+     ========================================================================= -->
+<div class="lightbox" id="lightbox" role="dialog" aria-modal="true" aria-label="Photo agrandie" hidden>
+  <button class="lightbox-close" id="lightboxClose" aria-label="Fermer la photo">✕</button>
+  <img alt="" id="lightboxImg">
+</div>
+
+<!-- =========================================================================
      SCRIPTS — ne pas modifier ni réordonner ces lignes.
      Les 3 premiers fichiers contiennent le CONTENU modifiable (biscuits,
      points de vente, photos du bandeau) ; main.js fait fonctionner le site
