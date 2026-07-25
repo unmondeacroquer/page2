@@ -112,6 +112,24 @@ function renderBandeau() {
 
   if (photos.length <= 1) {
     track.classList.add("is-static");
+  } else {
+    // Calcule la distance EXACTE (en pixels) que le bandeau doit parcourir
+    // pour boucler parfaitement, en mesurant la position réelle du premier
+    // élément du second groupe de photos dans le DOM. On ne peut pas se
+    // fier à un simple "50%" dès qu'il y a un espacement (gap) entre les
+    // photos, sinon un petit décalage s'accumule et devient visible
+    // (c'est ce qui causait le "saut" au survol de la souris).
+    const updateShift = () => {
+      const secondSetStart = track.children[photos.length];
+      if (secondSetStart) {
+        track.style.setProperty("--bandeau-shift", secondSetStart.offsetLeft + "px");
+      }
+    };
+    updateShift();
+    // Les photos changent de taille selon la largeur de l'écran (voir
+    // .bandeau-item en clamp() dans le CSS) : on recalcule donc aussi au
+    // redimensionnement de la fenêtre.
+    window.addEventListener("resize", updateShift);
   }
 }
 
