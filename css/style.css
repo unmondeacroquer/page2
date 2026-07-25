@@ -1,9 +1,49 @@
 /* =========================================================================
    UN MONDE À CROQUER — style.css
-   Tokens extraits du logo et de la maquette de marque.
-   Polices officielles fournies par la cliente (licence propriétaire).
+   =========================================================================
+
+   GUIDE RAPIDE — comment modifier ce fichier toi-même
+   -------------------------------------------------------------------------
+   Ce fichier contrôle TOUTES les couleurs, tailles et mises en page du
+   site. Pas besoin de tout comprendre : voici les 3 choses à savoir.
+
+   1. LES COULEURS SONT CENTRALISÉES tout en haut, dans le bloc ":root"
+      (juste en dessous de ce texte). Change une couleur UNE SEULE FOIS
+      là-bas, et elle se met à jour PARTOUT sur le site automatiquement
+      (boutons, titres, fonds...). Ne cherche pas les couleurs ailleurs
+      dans le fichier — tu verras des noms comme "var(--maroon)", ça veut
+      dire "va chercher la couleur --maroon définie tout en haut".
+
+   2. LES TAILLES RESPONSIVES utilisent souvent une formule du type :
+         clamp(300px, 50vw, 600px)
+      Ça veut dire : "jamais plus petit que 300px, jamais plus grand que
+      600px, et entre les deux ça s'ajuste selon la largeur de l'écran
+      (50vw = 50% de la largeur de la fenêtre)".
+      → Pour AGRANDIR un élément : augmente les 3 valeurs (ex: 300→380,
+        600→720).
+      → Pour un élément à TAILLE FIXE (pas responsive) : remplace tout
+        par une seule valeur, ex: "width: 400px;"
+
+   3. CHAQUE SECTION DU SITE a son bloc, annoncé par un commentaire
+      comme celui-ci :
+         /* -----------------------------------------------------------
+            Nom de la section
+            ----------------------------------------------------------- */
+      Cherche (Ctrl+F) le nom de la section que tu veux modifier
+      (ex: "Header", "Hero", "Footer", "Nos biscuits").
+
+   Astuce générale : après une modification, sauvegarde le fichier et
+   recharge la page dans ton navigateur pour voir le résultat avant de
+   l'envoyer sur GitHub.
    ========================================================================= */
 
+
+/* =========================================================================
+   POLICES — ne pas modifier cette section (sauf si tu changes de police)
+   Ces blocs "chargent" les 3 polices officielles de la marque depuis le
+   dossier fonts/. Elles sont ensuite utilisées via les variables
+   --font-display, --font-subtitle et --font-body définies plus bas.
+   ========================================================================= */
 @font-face {
   font-family: "Mavericks";
   src: url("../fonts/MavericksRegular.otf") format("opentype");
@@ -44,36 +84,55 @@
   font-display: swap;
 }
 
+
+/* =========================================================================
+   TOKENS — LES RÉGLAGES PRINCIPAUX DU SITE
+   C'est ICI que tu changes une couleur, une police ou un arrondi pour
+   tout le site en une seule fois.
+   ========================================================================= */
 :root {
-  /* Couleurs */
-  --cream: #EDE8D5;
-  --cream-deep: #E1DBC1;
-  --white: #FFFDF8;
-  --maroon: #9C3031;
-  --maroon-dark: #7C1A21;
-  --ink: #3B2418;
-  --terracotta: #9C3031;
-  --terracotta-dark: #7C1A21;
-  --sable: #D8996E;
-  --bourgogne: #7C1A21;
+  /* ---- COULEURS -------------------------------------------------------
+     Format hexadécimal (#RRGGBB). Change la valeur après le ":" pour
+     changer la couleur PARTOUT où elle est utilisée sur le site.
+     Un site comme https://htmlcolorcodes.com/fr/ permet de choisir une
+     couleur visuellement et de récupérer son code hexadécimal. */
+  --cream: #EDE8D5;          /* fond principal du site (couleur de marque "Sablé clair") */
+  --cream-deep: #E1DBC1;     /* fond légèrement plus foncé, pour alterner les sections */
+  --white: #FFFDF8;          /* blanc cassé, utilisé pour les cartes de biscuits */
+  --maroon: #9C3031;         /* rouge principal de la marque — titres, boutons */
+  --maroon-dark: #7C1A21;    /* = couleur "Bourgogne" — survol des boutons, texte foncé */
+  --ink: #3B2418;            /* couleur du texte courant (paragraphes) */
+  --terracotta: #9C3031;     /* alias du rouge principal, utilisé pour les boutons/accents */
+  --terracotta-dark: #7C1A21;/* version foncée du rouge, au survol de la souris */
+  --sable: #D8996E;          /* couleur secondaire "Sablé" — utilisée en petites touches décoratives */
+  --bourgogne: #7C1A21;      /* couleur secondaire "Bourgogne" — texte des étiquettes, focus clavier */
 
-  /* Typographie — polices officielles de la marque */
-  --font-display: "Mavericks", Georgia, serif;       /* titres */
-  --font-subtitle: "Recoleta", Georgia, serif;        /* sous-titres */
-  --font-body: "Brandon Grotesque", -apple-system, sans-serif; /* texte courant */
+  /* ---- POLICES ----------------------------------------------------------
+     3 polices officielles. Si tu veux qu'un texte utilise une police
+     différente, change plutôt "font-family: var(--font-XXX)" à l'endroit
+     concerné plus bas dans le fichier — ne touche pas ces lignes-ci sauf
+     si tu changes carrément de police pour tout le site. */
+  --font-display: "Mavericks", Georgia, serif;                  /* GRANDS TITRES (h1, h2) */
+  --font-subtitle: "Recoleta", Georgia, serif;                  /* SOUS-TITRES (h3 : noms de biscuits, noms de commerces...) */
+  --font-body: "Brandon Grotesque", -apple-system, sans-serif;  /* TEXTE COURANT (paragraphes, menu, boutons, étiquettes) */
 
-  /* Rythme */
-  --radius-s: 10px;
-  --radius-m: 20px;
-  --radius-l: 32px;
-  --shadow-soft: 0 12px 30px -12px rgba(74, 29, 34, 0.25);
-  --section-pad: clamp(56px, 9vw, 110px);
+  /* ---- FORMES ET ESPACEMENTS --------------------------------------------
+     --radius-X contrôle l'arrondi des coins (plus le chiffre est grand,
+     plus c'est arrondi). --shadow-soft est l'ombre douce utilisée sous
+     les boutons et les cartes. --section-pad est l'espace vertical
+     au-dessus et en dessous de chaque grande section du site. */
+  --radius-s: 10px;   /* petit arrondi (boutons "outline", messages d'accessibilité) */
+  --radius-m: 20px;   /* arrondi moyen (cartes biscuits, image de la carte) */
+  --radius-l: 32px;   /* grand arrondi (actuellement peu utilisé, réservé) */
+  --shadow-soft: 0 12px 30px -12px rgba(74, 29, 34, 0.25); /* ombre douce (boutons, cartes) */
+  --section-pad: clamp(56px, 9vw, 110px); /* espace vertical entre les sections — augmente pour plus d'air */
 }
 
 * { box-sizing: border-box; }
 
 html {
-  scroll-behavior: smooth;
+  scroll-behavior: smooth; /* défilement en douceur quand on clique un lien du menu */
+  overflow-x: hidden;      /* sécurité anti-débordement horizontal sur téléphone — ne pas retirer */
 }
 
 body {
@@ -88,13 +147,15 @@ img { max-width: 100%; display: block; }
 
 a { color: inherit; }
 
+/* Titres principaux (balises <h1> et <h2> dans le HTML) */
 h1, h2 {
   font-family: var(--font-display);
-  color: var(--maroon);
+  color: var(--maroon);   /* couleur du texte des grands titres */
   margin: 0;
   line-height: 1.08;
 }
 
+/* Sous-titres (balises <h3> : noms de biscuits, noms de commerces...) */
 h3 {
   font-family: var(--font-subtitle);
   color: var(--maroon);
@@ -102,33 +163,36 @@ h3 {
   line-height: 1.15;
 }
 
+/* Petit texte en majuscules au-dessus des titres de section (ex: "EN ESTRIE") */
 .eyebrow {
   font-family: var(--font-body);
   font-weight: 800;
-  letter-spacing: 0.14em;
+  letter-spacing: 0.14em;   /* espacement entre les lettres */
   text-transform: uppercase;
-  font-size: 0.78rem;
+  font-size: 0.78rem;       /* taille du texte — augmente pour l'agrandir */
   color: var(--bourgogne);
 }
 
-.accent { color: var(--terracotta); }
+.accent { color: var(--terracotta); } /* classe utilitaire pour mettre un mot en rouge dans une phrase */
 
+/* Largeur maximale du contenu, centré, avec marge sur les côtés */
 .container {
   width: 100%;
-  max-width: 1180px;
+  max-width: 1180px;  /* largeur max du contenu sur grand écran — augmente pour un site plus large */
   margin: 0 auto;
-  padding: 0 24px;
+  padding: 0 24px;    /* marge de sécurité sur les côtés (petits écrans) */
 }
 
+/* ---- BOUTONS --------------------------------------------------------- */
 .btn {
   display: inline-flex;
   align-items: center;
   gap: 10px;
   font-family: var(--font-body);
   font-weight: 700;
-  font-size: 1rem;
-  padding: 15px 30px;
-  border-radius: 999px;
+  font-size: 1rem;        /* taille du texte du bouton */
+  padding: 15px 30px;     /* hauteur/largeur du bouton — augmente pour un bouton plus gros */
+  border-radius: 999px;   /* 999px = complètement arrondi ("pilule") */
   border: 2px solid transparent;
   cursor: pointer;
   text-decoration: none;
@@ -136,8 +200,8 @@ h3 {
 }
 
 .btn-primary {
-  background: var(--terracotta);
-  color: var(--white);
+  background: var(--terracotta);  /* couleur de fond du bouton principal */
+  color: var(--white);            /* couleur du texte */
   box-shadow: var(--shadow-soft);
 }
 .btn-primary:hover { background: var(--terracotta-dark); transform: translateY(-2px); }
@@ -150,7 +214,8 @@ h3 {
 .btn-outline:hover { background: var(--terracotta); color: var(--white); }
 
 /* -------------------------------------------------------------------------
-   Skip link / accessibilité clavier
+   Skip link / accessibilité clavier — lien invisible utilisé par les
+   lecteurs d'écran, tu peux ignorer ce bloc.
    ------------------------------------------------------------------------- */
 .skip-link {
   position: absolute;
@@ -168,23 +233,23 @@ h3 {
 }
 
 :focus-visible {
-  outline: 3px solid var(--bourgogne);
+  outline: 3px solid var(--bourgogne); /* contour visible quand on navigue au clavier (Tab) */
   outline-offset: 3px;
 }
 
 /* -------------------------------------------------------------------------
-   Header
+   HEADER — bandeau du haut avec le logo et le menu
    ------------------------------------------------------------------------- */
 .site-header {
-  position: sticky;
+  position: sticky;   /* reste collé en haut de l'écran quand on défile */
   top: 0;
   z-index: 50;
   display: flex;
   align-items: center;
-  justify-content: space-between;
-  padding: 14px 24px;
-  background: rgba(247, 240, 223, 0.88);
-  backdrop-filter: blur(8px);
+  justify-content: space-between;  /* logo à gauche, menu à droite */
+  padding: 14px 24px;              /* hauteur du bandeau — augmente pour un header plus haut */
+  background: rgba(247, 240, 223, 0.88); /* fond du header, légèrement transparent */
+  backdrop-filter: blur(8px);      /* flou derrière le header au défilement */
   border-bottom: 1px solid rgba(107, 42, 49, 0.12);
 }
 
@@ -193,21 +258,18 @@ h3 {
   align-items: center;
   gap: 10px;
   text-decoration: none;
-  font-family: var(--font-display);
-  font-weight: 700;
-  color: var(--maroon);
-  font-size: 1.05rem;
 }
 
+/* Taille du logo dans le header */
 .site-header .brand img {
-  height: 46px;
-  width: auto;
+  height: 46px;    /* ← CHANGE CETTE VALEUR pour agrandir/rétrécir le logo du header */
+  width: auto;     /* la largeur s'ajuste automatiquement, ne pas toucher */
   object-fit: contain;
 }
 
 .site-nav {
   display: flex;
-  gap: 28px;
+  gap: 28px;          /* espace entre les liens du menu */
   list-style: none;
   margin: 0;
   padding: 0;
@@ -216,7 +278,7 @@ h3 {
 .site-nav a {
   text-decoration: none;
   font-weight: 700;
-  font-size: 0.92rem;
+  font-size: 0.92rem;   /* taille du texte des liens du menu */
   color: var(--maroon);
   padding: 6px 2px;
   border-bottom: 2px solid transparent;
@@ -224,6 +286,7 @@ h3 {
 }
 .site-nav a:hover { border-color: var(--terracotta); }
 
+/* Bouton "hamburger" (3 lignes) affiché uniquement sur mobile */
 .nav-toggle {
   display: none;
   background: none;
@@ -241,35 +304,29 @@ h3 {
 }
 
 /* -------------------------------------------------------------------------
-   Hero
+   HERO — grande bannière d'accueil avec le logo principal
    ------------------------------------------------------------------------- */
 .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(50px, 8vw, 90px) 24px clamp(90px, 12vw, 150px);
+  padding: clamp(50px, 8vw, 90px) 24px clamp(90px, 12vw, 150px); /* espace au-dessus/en dessous du contenu */
   text-align: center;
   background: linear-gradient(180deg, var(--cream) 0%, var(--cream) 60%, var(--cream-deep) 100%);
-}
-
-.hero-landscape {
-  position: absolute;
-  bottom: 0;
-  left: 0;
-  width: 100%;
-  line-height: 0;
-  z-index: 0;
 }
 
 .hero-inner {
   position: relative;
   z-index: 2;
-  max-width: 820px;
+  max-width: 820px;  /* largeur max du bloc central du hero — augmente si tu agrandis le logo */
   margin: 0 auto;
 }
 
+/* Conteneur du logo principal (grande image du haut) */
 .hero-mascot {
-  width: clamp(340px, 58vw, 780px);
-  margin: 0 auto 28px;
+  width: clamp(200px, 55vw, 780px); /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir le logo principal
+                                        (minimum, taille selon l'écran, maximum) */
+  max-width: 100%;                  /* sécurité anti-débordement sur petits téléphones — ne pas retirer */
+  margin: 0 auto 28px;              /* dernier chiffre = espace en dessous du logo */
 }
 
 .hero-mascot img {
@@ -277,6 +334,7 @@ h3 {
   height: auto;
 }
 
+/* Texte invisible à l'écran mais lu par les lecteurs d'écran (SEO/accessibilité) — ne pas supprimer */
 .visually-hidden {
   position: absolute;
   width: 1px;
@@ -289,44 +347,46 @@ h3 {
   border: 0;
 }
 
+/* Rangée des 4 icônes rondes (amour / artisanal / sans gluten / végan) sous le logo */
 .hero-icons {
   display: flex;
   justify-content: center;
   align-items: center;
-  gap: clamp(20px, 5vw, 44px);
+  flex-wrap: wrap;                /* passe à la ligne si l'écran est trop étroit pour les 4 */
+  gap: clamp(10px, 4vw, 40px);    /* espace entre les icônes */
   list-style: none;
-  margin: 0 0 32px;
+  margin: 0 0 32px;               /* dernier chiffre = espace en dessous de la rangée d'icônes */
   padding: 0;
 }
 
 .hero-icons img {
-  width: clamp(80px, 11vw, 120px);
-  height: clamp(80px, 11vw, 120px);
+  width: clamp(56px, 9vw, 110px);   /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir les icônes */
+  height: clamp(56px, 9vw, 110px);  /*   (garde les mêmes valeurs sur width et height pour rester rond) */
   object-fit: contain;
 }
 
 /* -------------------------------------------------------------------------
-   Bandeau défilant (marquee)
+   BANDEAU DÉFILANT — photos qui défilent en boucle sous le hero
    ------------------------------------------------------------------------- */
 .bandeau {
   overflow: hidden;
-  background: var(--maroon);
+  background: var(--maroon);  /* couleur visible derrière/autour des photos */
   padding: 0;
 }
 
 .bandeau-track {
   display: flex;
   width: max-content;
-  animation: scroll-left 38s linear infinite;
+  animation: scroll-left 38s linear infinite; /* 38s = vitesse du défilement, augmente pour ralentir */
 }
 
 .bandeau-track.is-static {
-  animation: none;
+  animation: none;  /* désactivé automatiquement s'il n'y a qu'une seule photo */
 }
 
 .bandeau-item {
   flex: 0 0 auto;
-  width: clamp(220px, 26vw, 340px);
+  width: clamp(220px, 26vw, 340px);   /* taille de chaque photo dans le bandeau */
   height: clamp(160px, 20vw, 240px);
   overflow: hidden;
 }
@@ -334,7 +394,7 @@ h3 {
 .bandeau-item img {
   width: 100%;
   height: 100%;
-  object-fit: cover;
+  object-fit: cover;  /* remplit le cadre en rognant si besoin, sans déformer la photo */
 }
 
 @keyframes scroll-left {
@@ -342,25 +402,25 @@ h3 {
   to { transform: translateX(-50%); }
 }
 
-.bandeau:hover .bandeau-track { animation-play-state: paused; }
+.bandeau:hover .bandeau-track { animation-play-state: paused; } /* pause le défilement au survol de la souris */
 
 @media (prefers-reduced-motion: reduce) {
-  .bandeau-track { animation: none; }
+  .bandeau-track { animation: none; } /* désactive l'animation pour les personnes sensibles au mouvement */
 }
 
 /* -------------------------------------------------------------------------
-   Sections génériques
+   Réglages génériques appliqués à toutes les sections du site
    ------------------------------------------------------------------------- */
-section { padding: var(--section-pad) 0; }
+section { padding: var(--section-pad) 0; } /* espace vertical entre chaque grande section */
 
 .section-head {
   text-align: center;
-  max-width: 620px;
+  max-width: 620px;                       /* largeur max du texte d'intro de chaque section */
   margin: 0 auto clamp(30px, 5vw, 52px);
 }
 
 .section-head h2 {
-  font-size: clamp(1.9rem, 4vw, 2.6rem);
+  font-size: clamp(1.9rem, 4vw, 2.6rem);  /* taille des titres de section ("Nos biscuits", etc.) */
   margin: 8px 0 12px;
 }
 
@@ -371,44 +431,71 @@ section { padding: var(--section-pad) 0; }
 }
 
 /* -------------------------------------------------------------------------
-   Nos biscuits — carrousel
+   NOS BISCUITS — carrousel de cartes
+   Pour changer le CONTENU (nom, photo, description, étiquettes) : modifie
+   plutôt le fichier js/cookies-data.js, pas ce fichier-ci.
    ------------------------------------------------------------------------- */
-.cookies-section { background: var(--white); }
+.cookies-section { background: var(--white); } /* fond de la section (blanc cassé) */
 
-.carousel {
-  position: relative;
+.carousel { position: relative; }
+
+/* Dégradés sur les bords gauche/droite pour suggérer qu'il y a d'autres
+   biscuits à découvrir en faisant défiler — effet "vitrine" plus soigné */
+.carousel::before,
+.carousel::after {
+  content: "";
+  position: absolute;
+  top: 6px;
+  bottom: 32px;
+  width: clamp(24px, 4vw, 64px);
+  z-index: 2;
+  pointer-events: none;  /* laisse passer les clics à travers le dégradé */
+}
+.carousel::before {
+  left: 0;
+  background: linear-gradient(90deg, var(--white) 0%, rgba(255,253,248,0) 100%);
+}
+.carousel::after {
+  right: 0;
+  background: linear-gradient(270deg, var(--white) 0%, rgba(255,253,248,0) 100%);
 }
 
 .carousel-track {
   display: flex;
-  gap: 22px;
+  gap: 22px;                    /* espace horizontal entre les cartes */
   overflow-x: auto;
   scroll-snap-type: x mandatory;
   padding: 6px 6px 18px;
-  scrollbar-width: thin;
-  scrollbar-color: var(--sable) transparent;
+  scroll-padding: 6px;
+  scrollbar-width: none;        /* cache la barre de défilement (Firefox) — navigation via les flèches */
 }
 
-.carousel-track::-webkit-scrollbar { height: 8px; }
-.carousel-track::-webkit-scrollbar-thumb { background: var(--sable); border-radius: 8px; }
+.carousel-track::-webkit-scrollbar { display: none; } /* cache la barre de défilement (Chrome/Safari) */
 
+/* Carte individuelle d'un biscuit */
 .cookie-card {
   scroll-snap-align: start;
   flex: 0 0 auto;
-  width: clamp(200px, 20vw, 240px);
-  background: var(--cream);
-  border-radius: var(--radius-m);
+  width: clamp(200px, 20vw, 240px);  /* ← taille d'une carte biscuit (largeur) */
+  background: var(--cream);          /* fond de la carte */
+  border-radius: var(--radius-m);    /* arrondi des coins de la carte */
   padding: 18px;
   text-align: center;
   box-shadow: var(--shadow-soft);
-  transition: transform 0.25s ease;
+  border: 1px solid transparent;
+  transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1), box-shadow 0.3s ease, border-color 0.3s ease;
 }
-.cookie-card:hover { transform: translateY(-6px); }
+.cookie-card:hover {
+  transform: translateY(-8px);              /* effet de soulèvement au survol */
+  box-shadow: 0 20px 34px -14px rgba(74,29,34,0.35);
+  border-color: var(--sable);
+}
 
+/* Photo ronde du biscuit, en haut de la carte */
 .cookie-card .cookie-photo {
   width: 100%;
-  aspect-ratio: 1 / 1;
-  border-radius: 50%;
+  aspect-ratio: 1 / 1;   /* garde toujours un cercle parfait */
+  border-radius: 50%;    /* 50% = complètement rond. Mets une petite valeur (ex: 16px) pour un carré arrondi */
   overflow: hidden;
   margin: 0 auto 16px;
   border: 3px solid var(--white);
@@ -419,15 +506,17 @@ section { padding: var(--section-pad) 0; }
   width: 100%;
   height: 100%;
   object-fit: cover;
+  transition: transform 0.4s ease;
 }
+.cookie-card:hover .cookie-photo img { transform: scale(1.06); } /* léger zoom sur la photo au survol */
 
 .cookie-card h3 {
-  font-size: 1.2rem;
+  font-size: 1.2rem;   /* taille du nom du biscuit */
   margin-bottom: 6px;
 }
 
 .cookie-card p.desc {
-  font-size: 0.9rem;
+  font-size: 0.9rem;   /* taille de la description */
   color: var(--maroon-dark);
   opacity: 0.85;
   min-height: 40px;
@@ -441,6 +530,7 @@ section { padding: var(--section-pad) 0; }
   margin-top: 10px;
 }
 
+/* Étiquettes "Végan" / "Sans produits laitiers" */
 .tag {
   font-size: 0.72rem;
   font-weight: 800;
@@ -449,9 +539,10 @@ section { padding: var(--section-pad) 0; }
   border-radius: 999px;
   border: 1.5px solid var(--bourgogne);
   color: var(--bourgogne);
-  background: rgba(216, 153, 110, 0.16);
+  background: rgba(216, 153, 110, 0.16);  /* fond très pâle de l'étiquette (couleur "sable" transparente) */
 }
 
+/* Étiquette "Sans gluten" — couleur différente des autres étiquettes */
 .tag.gluten { border-color: var(--terracotta); color: var(--terracotta-dark); background: rgba(156,48,49,0.08); }
 
 .carousel-arrows {
@@ -461,31 +552,46 @@ section { padding: var(--section-pad) 0; }
   margin-top: 18px;
 }
 
+/* Boutons flèches ‹ › pour faire défiler les biscuits */
 .carousel-arrow {
-  width: 46px;
-  height: 46px;
+  width: 48px;    /* taille des boutons flèches (rond) */
+  height: 48px;
   border-radius: 50%;
-  border: 2px solid var(--maroon);
-  background: var(--white);
-  color: var(--maroon);
-  font-size: 1.2rem;
+  border: none;
+  background: var(--maroon);       /* fond plein (plus visible qu'un simple contour) */
+  color: var(--white);
+  font-size: 1.3rem;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  transition: background 0.2s ease, color 0.2s ease;
+  box-shadow: 0 8px 18px -6px rgba(74,29,34,0.45);
+  transition: background 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
 }
-.carousel-arrow:hover { background: var(--maroon); color: var(--white); }
+.carousel-arrow:hover { background: var(--terracotta-dark); transform: translateY(-2px); }
+
+/* État désactivé quand on est déjà tout au début ou tout à la fin du
+   carrousel — géré automatiquement par js/main.js, ne pas modifier ici */
+.carousel-arrow:disabled {
+  background: var(--cream-deep);
+  color: var(--maroon);
+  opacity: 0.45;
+  cursor: default;
+  box-shadow: none;
+  transform: none;
+}
 
 /* -------------------------------------------------------------------------
-   Où nous trouver
+   OÙ NOUS TROUVER — carte + liste des points de vente
+   Pour changer le CONTENU (nom, adresse, ville des commerces) : modifie
+   plutôt le fichier js/points-de-vente-data.js, pas ce fichier-ci.
    ------------------------------------------------------------------------- */
-.map-section { background: var(--cream-deep); }
+.map-section { background: var(--cream-deep); } /* fond de la section (crème plus foncé) */
 
 .map-layout {
   display: grid;
-  grid-template-columns: minmax(260px, 380px) 1fr;
-  gap: 40px;
+  grid-template-columns: minmax(260px, 380px) 1fr;  /* colonne liste / colonne carte */
+  gap: 40px;         /* espace entre la liste et l'image de la carte */
   align-items: start;
 }
 
@@ -495,7 +601,7 @@ section { padding: var(--section-pad) 0; }
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 14px;
+  gap: 14px;   /* espace vertical entre chaque commerce dans la liste */
 }
 
 .pdv-list li {
@@ -509,7 +615,7 @@ section { padding: var(--section-pad) 0; }
 }
 
 .pdv-pin {
-  color: var(--terracotta);
+  color: var(--terracotta);  /* couleur de l'icône 📍 */
   font-size: 1.1rem;
   line-height: 1.3;
   flex-shrink: 0;
@@ -519,7 +625,7 @@ section { padding: var(--section-pad) 0; }
   display: block;
   color: var(--maroon);
   font-family: var(--font-subtitle);
-  font-size: 1.05rem;
+  font-size: 1.05rem;    /* taille du nom du commerce */
 }
 
 .pdv-info .pdv-ville {
@@ -546,22 +652,23 @@ section { padding: var(--section-pad) 0; }
 .pdv-info a.pdv-site:hover { text-decoration: underline; }
 
 .map-image {
-  border-radius: var(--radius-m);
+  border-radius: var(--radius-m);  /* arrondi des coins de l'image de la carte */
   overflow: hidden;
   box-shadow: var(--shadow-soft);
 }
 
+/* Sur petit écran (mobile/tablette) : la liste passe au-dessus de la carte au lieu d'être à côté */
 @media (max-width: 860px) {
   .map-layout { grid-template-columns: 1fr; }
 }
 
 /* -------------------------------------------------------------------------
-   Aussi disponibles
+   AUSSI DISPONIBLES — grille des 5 cartes (marchés, festivals...)
    ------------------------------------------------------------------------- */
 .disponibles-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr));
-  gap: 24px;
+  grid-template-columns: repeat(auto-fit, minmax(170px, 1fr)); /* nombre de colonnes automatique selon la largeur */
+  gap: 24px;   /* espace entre les cartes */
 }
 
 .disponible-card {
@@ -569,17 +676,18 @@ section { padding: var(--section-pad) 0; }
   padding: 20px 14px;
 }
 
+/* Petit cercle avec l'emoji au-dessus de chaque carte */
 .disponible-icon {
-  width: 58px;
+  width: 58px;    /* taille du cercle — change cette valeur ET celle du dessous ensemble */
   height: 58px;
   margin: 0 auto 14px;
   border-radius: 50%;
   background: var(--white);
-  border: 2px solid var(--sable);
+  border: 2px solid var(--sable);  /* anneau de couleur "sable" autour du cercle */
   display: flex;
   align-items: center;
   justify-content: center;
-  font-size: 1.6rem;
+  font-size: 1.6rem;   /* taille de l'emoji à l'intérieur */
   box-shadow: 0 8px 18px rgba(74,29,34,0.1);
 }
 
@@ -595,17 +703,17 @@ section { padding: var(--section-pad) 0; }
 }
 
 /* -------------------------------------------------------------------------
-   Footer
+   FOOTER — bas de page (logo, coordonnées, réseaux sociaux)
    ------------------------------------------------------------------------- */
 .site-footer {
-  background: var(--maroon);
-  color: var(--cream);
+  background: var(--maroon);  /* couleur de fond du footer */
+  color: var(--cream);        /* couleur du texte par défaut dans le footer */
   padding: 56px 0 26px;
 }
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 1.3fr 1fr;
+  grid-template-columns: 1.3fr 1fr;  /* largeur relative : colonne logo / colonne contact */
   gap: 40px;
   align-items: start;
 }
@@ -614,24 +722,27 @@ section { padding: var(--section-pad) 0; }
   display: flex;
   flex-direction: column;
   align-items: flex-start;
-  gap: 18px;
+  gap: 18px;   /* espace entre le logo et la rangée d'icônes */
 }
 
+/* Taille du logo dans le footer */
 .footer-brand img.footer-logo {
-  width: clamp(150px, 16vw, 190px);
+  width: clamp(150px, 16vw, 190px);  /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir le logo du footer */
   height: auto;
 }
 
+/* Rangée des 3 petites icônes (amour / artisanal / sans gluten) en crème dans le footer */
 .footer-icons {
   display: flex;
-  gap: 16px;
+  flex-wrap: wrap;  /* passe à la ligne si l'écran est trop étroit pour les 4 icônes */
+  gap: 14px;   /* espace entre les icônes */
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .footer-icons img {
-  width: 54px;
+  width: 54px;    /* ← CHANGE CETTE VALEUR (et celle du dessous) pour agrandir/rétrécir les icônes du footer */
   height: 54px;
   object-fit: contain;
 }
@@ -649,7 +760,7 @@ section { padding: var(--section-pad) 0; }
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 10px;
+  gap: 10px;         /* espace entre chaque ligne de coordonnées */
   font-size: 0.94rem;
 }
 
@@ -660,13 +771,14 @@ section { padding: var(--section-pad) 0; }
 }
 .footer-contact a:hover { opacity: 1; text-decoration: underline; }
 
+/* Petits cercles Facebook / Instagram */
 .social-links {
   display: flex;
   gap: 14px;
 }
 
 .social-links a {
-  width: 40px;
+  width: 40px;   /* taille des cercles Facebook/Instagram */
   height: 40px;
   border-radius: 50%;
   border: 1.5px solid rgba(247,240,223,0.4);
@@ -688,15 +800,16 @@ section { padding: var(--section-pad) 0; }
   opacity: 0.7;
 }
 
+/* Sur mobile : les 2 colonnes du footer s'empilent au lieu d'être côte à côte */
 @media (max-width: 720px) {
   .footer-grid { grid-template-columns: 1fr; gap: 32px; }
 }
 
 /* -------------------------------------------------------------------------
-   Responsive — navigation mobile
+   RESPONSIVE — menu mobile (moins de 780px de large)
    ------------------------------------------------------------------------- */
 @media (max-width: 780px) {
-  .nav-toggle { display: block; }
+  .nav-toggle { display: block; }  /* affiche le bouton "hamburger" */
 
   .site-nav {
     position: fixed;
@@ -708,14 +821,14 @@ section { padding: var(--section-pad) 0; }
     align-items: center;
     gap: 0;
     padding: 0;
-    max-height: 0;
+    max-height: 0;      /* menu fermé par défaut */
     overflow: hidden;
     transition: max-height 0.3s ease;
     border-bottom: 1px solid rgba(107,42,49,0.12);
   }
 
   .site-nav.is-open {
-    max-height: 320px;
+    max-height: 320px;  /* hauteur du menu déplié — augmente si tu ajoutes des liens */
     padding: 10px 0;
   }
 
@@ -727,12 +840,12 @@ section { padding: var(--section-pad) 0; }
 }
 
 /* -------------------------------------------------------------------------
-   Reveal on scroll
+   ANIMATION D'APPARITION — les blocs apparaissent en fondu au défilement
    ------------------------------------------------------------------------- */
 .reveal {
   opacity: 0;
   transform: translateY(18px);
-  transition: opacity 0.6s ease, transform 0.6s ease;
+  transition: opacity 0.6s ease, transform 0.6s ease;  /* 0.6s = durée de l'apparition */
 }
 .reveal.is-visible {
   opacity: 1;
@@ -740,5 +853,5 @@ section { padding: var(--section-pad) 0; }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .reveal { opacity: 1; transform: none; transition: none; }
+  .reveal { opacity: 1; transform: none; transition: none; } /* désactivé pour les personnes sensibles au mouvement */
 }
