@@ -52,6 +52,18 @@ function setupCookiesArrows() {
 
   prev.addEventListener("click", () => scrollByCard(-1));
   next.addEventListener("click", () => scrollByCard(1));
+
+  // Grise et désactive la flèche quand on est déjà tout au début ou tout
+  // à la fin du carrousel — plus clair pour la personne qui visite le site.
+  const updateArrowState = () => {
+    const maxScroll = track.scrollWidth - track.clientWidth - 1;
+    prev.disabled = track.scrollLeft <= 0;
+    next.disabled = track.scrollLeft >= maxScroll;
+  };
+
+  track.addEventListener("scroll", updateArrowState);
+  window.addEventListener("resize", updateArrowState);
+  updateArrowState();
 }
 
 /* ------------------------------ Où nous trouver ------------------------------ */
