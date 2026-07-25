@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", () => {
   setupCookiesArrows();
   setupMobileNav();
   setupRevealOnScroll();
+  setupLightbox();
   document.getElementById("year").textContent = new Date().getFullYear();
 });
 
@@ -155,4 +156,51 @@ function setupRevealOnScroll() {
   }, { threshold: 0.15 });
 
   items.forEach(el => observer.observe(el));
+}
+
+/* ------------------------------ Visionneuse plein écran (lightbox) ------------------------------
+   Rend cliquables toutes les photos de biscuits et du bandeau défilant.
+   Se ferme au clavier (touche Échap), au clic de souris, ou au tap sur
+   mobile — n'importe où sur la photo agrandie ou le fond sombre. */
+
+function setupLightbox() {
+  const lightbox = document.getElementById("lightbox");
+  const lightboxImg = document.getElementById("lightboxImg");
+  const closeBtn = document.getElementById("lightboxClose");
+  if (!lightbox || !lightboxImg || !closeBtn) return;
+
+  let lastFocused = null;
+
+  function openLightbox(src, alt) {
+    lastFocused = document.activeElement;
+    lightboxImg.src = src;
+    lightboxImg.alt = alt || "";
+    lightbox.hidden = false;
+    document.body.classList.add("lightbox-open"); // empêche le défilement de la page derrière
+    closeBtn.focus();
+  }
+
+  function closeLightbox() {
+    lightbox.hidden = true;
+    lightboxImg.removeAttribute("src");
+    document.body.classList.remove("lightbox-open");
+    if (lastFocused) lastFocused.focus();
+  }
+
+  // Clic sur une photo de biscuit ou une photo du bandeau → ouvre la lightbox.
+  // "Délégation d'événements" : on écoute sur toute la page plutôt que sur
+  // chaque photo individuellement, ce qui fonctionne même si les photos
+  // sont ajoutées dynamiquement (cookies-data.js, bandeau-data.js).
+  document.addEventListener("click", (event) => {
+    const img = event.target.closest(".cookie-photo img, .bandeau-item img");
+    if (img) openLightbox(img.src, img.alt);
+  });
+
+  // Clic n'importe où dans la lightbox (photo agrandie ou fond sombre) → ferme.
+  lightbox.addEventListener("click", closeLightbox);
+
+  // Touche Échap → ferme.
+  document.addEventListener("keydown", (event) => {
+    if (event.key === "Escape" && !lightbox.hidden) closeLightbox();
+  });
 }
