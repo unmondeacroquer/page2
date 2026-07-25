@@ -1,26 +1,62 @@
+<!--
+  ===========================================================================
+  UN MONDE À CROQUER — index.html
+  ===========================================================================
+  GUIDE RAPIDE — comment modifier ce fichier toi-même
+
+  - Le TEXTE visible sur le site (titres, phrases, adresses...) est
+    directement écrit ici, entre les balises. Tu peux le modifier
+    directement, avec précaution pour ne pas casser une balise (garde
+    toujours les < > et les guillemets " " intacts).
+
+  - Les COULEURS, TAILLES et ESPACEMENTS ne sont PAS ici : ils sont tous
+    dans le fichier css/style.css, qui est lui aussi annoté.
+
+  - Le contenu des BISCUITS, des POINTS DE VENTE et des PHOTOS DU BANDEAU
+    n'est pas ici non plus : voir js/cookies-data.js,
+    js/points-de-vente-data.js et js/bandeau-data.js (chacun a son propre
+    mode d'emploi écrit en commentaire, en haut du fichier).
+
+  - Pour CHANGER UNE IMAGE (ex: remplacer le logo) : remplace le fichier
+    dans le dossier images/ en gardant EXACTEMENT le même nom, ou change
+    le nom du fichier après src=" " ci-dessous.
+  ===========================================================================
+-->
 <!DOCTYPE html>
 <html lang="fr">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<!-- Titre affiché dans l'onglet du navigateur et dans Google -->
 <title>Un Monde à croquer — Biscuits artisanaux en Estrie</title>
+<!-- Description affichée dans les résultats Google (bon pour le référencement) -->
 <meta name="description" content="Biscuits artisanaux faits avec amour, disponibles en Estrie : Sutton, Cowansville, Bromont, Lac-Brome. Sans gluten, végan, options sans produits laitiers.">
 
 <link rel="stylesheet" href="css/style.css">
-<link rel="icon" href="images/logo-signature.png" type="image/png">
+<!-- Petite icône affichée dans l'onglet du navigateur -->
+<link rel="icon" href="images/logo-favicon.png" type="image/png">
 </head>
 <body>
 
+<!-- Lien invisible utilisé par les lecteurs d'écran — ne pas supprimer -->
 <a class="skip-link" href="#contenu">Aller au contenu</a>
 
+<!-- =========================================================================
+     EN-TÊTE (HEADER) — logo + menu de navigation en haut de chaque page
+     Taille du logo à régler dans css/style.css → section "HEADER"
+     ========================================================================= -->
 <header class="site-header">
   <a href="#" class="brand">
     <img src="images/logo-hero.png" alt="Un Monde à croquer — d'amour et de biscuits">
   </a>
+  <!-- Bouton "hamburger" (3 lignes), visible seulement sur mobile -->
   <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="siteNav">
     <span></span><span></span><span></span>
   </button>
   <nav>
+    <!-- Liens du menu. Le texte après href="#..." doit correspondre à
+         l'id="..." de la section visée plus bas dans la page. -->
     <ul class="site-nav" id="siteNav">
       <li><a href="#biscuits">Nos biscuits</a></li>
       <li><a href="#ou-trouver">Où nous trouver</a></li>
@@ -32,37 +68,71 @@
 
 <main id="contenu">
 
-  <!-- ============================= HERO ============================= -->
+  <!-- =======================================================================
+       SECTION 1 — HERO (bannière d'accueil)
+       Logo principal + 3 icônes rondes + bouton "Découvrir nos biscuits"
+       Tailles à régler dans css/style.css → section "HERO"
+       ======================================================================= -->
   <section class="hero">
     <div class="hero-inner">
+
+      <!-- Logo principal. Pour le remplacer : change le fichier
+           images/logo-hero.png (même nom) ou change le nom ici. -->
       <div class="hero-mascot">
         <img src="images/logo-hero.png" alt="Un Monde à croquer — d'amour et de biscuits">
       </div>
+
+      <!-- Titre invisible à l'écran, gardé pour le SEO/l'accessibilité
+           (le nom de la marque est déjà visible dans l'image du logo
+           ci-dessus, donc ce texte n'est pas affiché). Ne pas supprimer. -->
       <h1 class="visually-hidden">Un Monde à croquer</h1>
+
+      <!-- Les 3 icônes rondes sous le logo. Pour changer laquelle est
+           affichée : remplace le nom de fichier après src="images/icons/...".
+           Icônes disponibles dans le dossier images/icons/ : amour, artisanal,
+           sans_gluten (chacune existe en version -rouge et -creme). -->
       <ul class="hero-icons">
         <li><img src="images/icons/amour-rouge.png" alt="Fait avec amour"></li>
         <li><img src="images/icons/artisanal-rouge.png" alt="Artisanal"></li>
         <li><img src="images/icons/sans_gluten-rouge.png" alt="Sans gluten"></li>
+        <li><img src="images/icons/vegan-rouge.png" alt="Options véganes"></li>
       </ul>
+
+      <!-- Bouton qui fait défiler jusqu'à la section biscuits.
+           Le texte entre > et < est modifiable directement. -->
       <a href="#biscuits" class="btn btn-primary">Découvrir nos biscuits ♥</a>
     </div>
   </section>
 
-  <!-- ===================== BANDEAU DÉFILANT ===================== -->
+  <!-- =======================================================================
+       SECTION 2 — BANDEAU DÉFILANT (photos en boucle)
+       Contenu (liste des photos) à modifier dans js/bandeau-data.js
+       Taille/vitesse à régler dans css/style.css → section "BANDEAU DÉFILANT"
+       Cette zone (id="bandeauTrack") est remplie automatiquement par le
+       script main.js à partir de bandeau-data.js — ne rien écrire dedans ici.
+       ======================================================================= -->
   <section class="bandeau" aria-label="Photos de nos biscuits et de notre atelier">
     <div class="bandeau-track" id="bandeauTrack"></div>
   </section>
 
-  <!-- ========================= NOS BISCUITS ========================= -->
+  <!-- =======================================================================
+       SECTION 3 — NOS BISCUITS (carrousel de cartes)
+       Contenu (biscuits) à modifier dans js/cookies-data.js
+       Apparence des cartes à régler dans css/style.css → section "NOS BISCUITS"
+       ======================================================================= -->
   <section id="biscuits" class="cookies-section">
     <div class="container">
       <div class="section-head reveal">
+        <!-- Petit texte au-dessus du titre -->
         <p class="eyebrow">Faits avec amour</p>
+        <!-- Titre de la section -->
         <h2>Nos biscuits</h2>
+        <!-- Phrase d'intro -->
         <p>À partir d'ingrédients simples et de qualité.</p>
       </div>
 
       <div class="carousel">
+        <!-- Rempli automatiquement par main.js à partir de cookies-data.js -->
         <div class="carousel-track" id="cookiesTrack"></div>
         <div class="carousel-arrows">
           <button class="carousel-arrow" id="cookiesPrev" aria-label="Biscuits précédents">‹</button>
@@ -72,7 +142,12 @@
     </div>
   </section>
 
-  <!-- ========================= OÙ NOUS TROUVER ========================= -->
+  <!-- =======================================================================
+       SECTION 4 — OÙ NOUS TROUVER (carte + liste des points de vente)
+       Contenu (commerces) à modifier dans js/points-de-vente-data.js
+       Pour changer l'image de la carte : remplace le fichier
+       images/carte-points-de-vente.jpg (même nom)
+       ======================================================================= -->
   <section id="ou-trouver" class="map-section">
     <div class="container">
       <div class="section-head reveal">
@@ -82,6 +157,7 @@
       </div>
 
       <div class="map-layout reveal">
+        <!-- Rempli automatiquement par main.js à partir de points-de-vente-data.js -->
         <ul class="pdv-list" id="pdvList"></ul>
         <div class="map-image">
           <img src="images/carte-points-de-vente.jpg" alt="Carte des points de vente Un Monde à croquer en Estrie : Bromont, Cowansville, Sutton, Foster (Lac-Brome)">
@@ -90,7 +166,14 @@
     </div>
   </section>
 
-  <!-- ========================= AUSSI DISPONIBLES ========================= -->
+  <!-- =======================================================================
+       SECTION 5 — AUSSI DISPONIBLES (5 cartes : marchés, festivals...)
+       Contenu écrit directement ci-dessous (pas de fichier séparé).
+       Pour changer l'emoji, la couleur ou la taille des cercles :
+       css/style.css → section "AUSSI DISPONIBLES"
+       Pour ajouter/retirer une carte : copie/colle un bloc
+       <div class="disponible-card">...</div> en entier.
+       ======================================================================= -->
   <section id="disponibles">
     <div class="container">
       <div class="section-head reveal">
@@ -99,7 +182,7 @@
 
       <div class="disponibles-grid reveal">
         <div class="disponible-card">
-          <div class="disponible-icon">🧺</div>
+          <div class="disponible-icon">🧺</div> <!-- change l'emoji ici -->
           <h3>Marchés</h3>
           <p>Retrouvez-nous dans plusieurs marchés locaux tout au long de l'année.</p>
         </div>
@@ -129,25 +212,36 @@
 
 </main>
 
-<!-- ============================= FOOTER ============================= -->
+<!-- =========================================================================
+     FOOTER — logo, coordonnées, réseaux sociaux, bas de page
+     Taille du logo et des icônes à régler dans css/style.css → section "FOOTER"
+     ========================================================================= -->
 <footer class="site-footer" id="contact">
   <div class="container footer-grid">
+
+    <!-- Colonne de gauche : logo crème + 3 petites icônes -->
     <div class="footer-brand">
       <img src="images/logo-footer.png" alt="Un Monde à croquer — d'amour et de biscuits" class="footer-logo">
       <ul class="footer-icons">
         <li><img src="images/icons/amour-creme.png" alt="Fait avec amour"></li>
         <li><img src="images/icons/artisanal-creme.png" alt="Artisanal"></li>
         <li><img src="images/icons/sans_gluten-creme.png" alt="Sans gluten"></li>
+        <li><img src="images/icons/vegan-creme.png" alt="Options véganes"></li>
       </ul>
     </div>
 
+    <!-- Colonne de droite : coordonnées + réseaux sociaux -->
     <div class="footer-contact">
       <h4>Contactez-nous</h4>
       <ul>
+        <!-- Modifie directement le texte, le numéro (après tel:+1) ou le
+             courriel (après mailto:) ci-dessous si besoin -->
         <li>Déborah Chaveron</li>
         <li><a href="tel:+15147978200">514 797-8200</a></li>
         <li><a href="mailto:unmondeacroquer.dc@gmail.com">unmondeacroquer.dc@gmail.com</a></li>
       </ul>
+      <!-- Remplace https://facebook.com/ et https://instagram.com/ par tes
+           vraies adresses de page une fois qu'elles existent -->
       <div class="social-links">
         <a href="https://facebook.com/" target="_blank" rel="noopener" aria-label="Facebook">f</a>
         <a href="https://instagram.com/" target="_blank" rel="noopener" aria-label="Instagram">◎</a>
@@ -156,10 +250,17 @@
   </div>
 
   <div class="footer-bottom">
+    <!-- L'année se met à jour toute seule (calculée par main.js), rien à faire -->
     © <span id="year"></span> Un Monde à croquer. Tous droits réservés.
   </div>
 </footer>
 
+<!-- =========================================================================
+     SCRIPTS — ne pas modifier ni réordonner ces lignes.
+     Les 3 premiers fichiers contiennent le CONTENU modifiable (biscuits,
+     points de vente, photos du bandeau) ; main.js fait fonctionner le site
+     à partir de ce contenu.
+     ========================================================================= -->
 <script src="js/cookies-data.js"></script>
 <script src="js/points-de-vente-data.js"></script>
 <script src="js/bandeau-data.js"></script>
