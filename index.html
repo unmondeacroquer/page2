@@ -74,11 +74,17 @@
        Tailles à régler dans css/style.css → section "HERO"
        ======================================================================= -->
   <section class="hero">
+    <!-- Photo de fond plein écran. L'image affichée est choisie dans
+         js/site-config.js (voir "heroBackground") — ne change pas le src
+         ici, change plutôt le réglage dans site-config.js. Si aucune
+         photo n'est choisie, le fond crème uni s'affiche à la place. -->
+    <div class="hero-bg is-empty" id="heroBg">
+      <img id="heroBgImage" alt="">
+    </div>
+
     <div class="hero-inner">
 
-      <!-- Logo principal. L'image affichée est choisie automatiquement
-           d'après js/site-config.js (voir "heroImage") — ne change pas
-           le src ici, change plutôt le réglage dans site-config.js. -->
+      <!-- Logo principal, transparent, affiché par-dessus la photo de fond. -->
       <div class="hero-mascot">
         <img id="heroImage" src="images/logo-hero.png" alt="Un Monde à croquer — d'amour et de biscuits">
       </div>
