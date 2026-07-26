@@ -1,19 +1,48 @@
 /* =========================================================================
    MAIN.JS — logique du site (aucune modification requise pour ajouter du
-   contenu : ça se fait dans cookies-data.js, points-de-vente-data.js et
-   bandeau-data.js)
+   contenu : ça se fait dans site-config.js, cookies-data.js,
+   points-de-vente-data.js et bandeau-data.js)
    ========================================================================= */
 
 document.addEventListener("DOMContentLoaded", () => {
-  renderCookies();
-  renderPointsDeVente();
-  renderBandeau();
-  setupCookiesArrows();
-  setupMobileNav();
-  setupRevealOnScroll();
-  setupLightbox();
-  document.getElementById("year").textContent = new Date().getFullYear();
+  // Chaque fonctionnalité est isolée dans son propre "essai" (try/catch) :
+  // si l'une d'elles rencontre un problème sur un appareil ou navigateur
+  // particulier, elle échoue silencieusement SANS empêcher les autres de
+  // fonctionner. Avant ce changement, un problème sur une seule fonction
+  // pouvait bloquer tout le reste du script sur certains appareils.
+  runSafely(setHeroImage);
+  runSafely(renderCookies);
+  runSafely(renderPointsDeVente);
+  runSafely(renderBandeau);
+  runSafely(setupCookiesArrows);
+  runSafely(setupMobileNav);
+  runSafely(setupRevealOnScroll);
+  runSafely(setupLightbox);
+  runSafely(() => {
+    document.getElementById("year").textContent = new Date().getFullYear();
+  });
 });
+
+function runSafely(fn) {
+  try {
+    fn();
+  } catch (error) {
+    console.error("Un Monde à croquer — une section du site a rencontré un problème :", error);
+  }
+}
+
+/* ---------------------------- Image d'accueil ---------------------------- */
+
+function setHeroImage() {
+  const img = document.getElementById("heroImage");
+  if (!img || typeof SITE_CONFIG === "undefined" || typeof HERO_IMAGES === "undefined") return;
+
+  const chosen = HERO_IMAGES[SITE_CONFIG.heroImage];
+  if (chosen) {
+    img.onerror = () => { img.onerror = null; img.src = "images/logo-hero.png"; };
+    img.src = chosen;
+  }
+}
 
 /* ---------------------------- Nos biscuits ---------------------------- */
 
@@ -87,7 +116,13 @@ function renderPointsDeVente() {
   `).join("");
 }
 
-/* ------------------------------ Bandeau défilant ------------------------------ */
+/* ------------------------------ Bandeau défilant ------------------------------
+   Le défilement est piloté directement en JavaScript (plutôt que par une
+   animation CSS) : c'est plus long à écrire, mais BEAUCOUP plus fiable
+   d'un appareil à l'autre. Certains navigateurs mobiles (surtout sur
+   iPad/Safari) gèrent mal les animations CSS qui dépendent d'une mesure
+   calculée dynamiquement, ce qui pouvait faire planter le défilement sur
+   ces appareils tout en fonctionnant très bien sur ordinateur. */
 
 function renderBandeau() {
   const track = document.getElementById("bandeauTrack");
@@ -111,26 +146,57 @@ function renderBandeau() {
   `).join("");
 
   if (photos.length <= 1) {
-    track.classList.add("is-static");
-  } else {
-    // Calcule la distance EXACTE (en pixels) que le bandeau doit parcourir
-    // pour boucler parfaitement, en mesurant la position réelle du premier
-    // élément du second groupe de photos dans le DOM. On ne peut pas se
-    // fier à un simple "50%" dès qu'il y a un espacement (gap) entre les
-    // photos, sinon un petit décalage s'accumule et devient visible
-    // (c'est ce qui causait le "saut" au survol de la souris).
-    const updateShift = () => {
-      const secondSetStart = track.children[photos.length];
-      if (secondSetStart) {
-        track.style.setProperty("--bandeau-shift", secondSetStart.offsetLeft + "px");
-      }
-    };
-    updateShift();
-    // Les photos changent de taille selon la largeur de l'écran (voir
-    // .bandeau-item en clamp() dans le CSS) : on recalcule donc aussi au
-    // redimensionnement de la fenêtre.
-    window.addEventListener("resize", updateShift);
+    return; // une seule photo : rien à faire défiler
   }
+
+  startBandeauAnimation(track, photos.length);
+}
+
+function startBandeauAnimation(track, singleSetCount) {
+  const PIXELS_PER_SECOND = 40; // ← CHANGE CE CHIFFRE pour accélérer/ralentir le défilement
+  let position = 0;
+  let paused = false;
+  let loopWidth = 0;
+  let lastTimestamp = null;
+
+  // Mesure la largeur exacte d'un seul jeu de photos (sans la copie).
+  // Recalculée à l'ouverture ET à chaque redimensionnement de fenêtre,
+  // puisque la taille des photos change selon la largeur de l'écran.
+  const measureLoopWidth = () => {
+    const secondSetStart = track.children[singleSetCount];
+    loopWidth = secondSetStart ? secondSetStart.offsetLeft : track.scrollWidth / 2;
+  };
+  measureLoopWidth();
+  window.addEventListener("resize", measureLoopWidth);
+
+  const prefersReducedMotion = window.matchMedia &&
+    window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (prefersReducedMotion) return; // respecte le réglage d'accessibilité du visiteur
+
+  // Pause au survol de la souris (ordinateur) et au toucher (mobile/tablette).
+  const bandeau = track.closest(".bandeau");
+  if (bandeau) {
+    bandeau.addEventListener("mouseenter", () => { paused = true; });
+    bandeau.addEventListener("mouseleave", () => { paused = false; });
+    bandeau.addEventListener("touchstart", () => { paused = true; }, { passive: true });
+    bandeau.addEventListener("touchend", () => { paused = false; });
+  }
+
+  function step(timestamp) {
+    if (lastTimestamp === null) lastTimestamp = timestamp;
+    const delta = (timestamp - lastTimestamp) / 1000; // secondes écoulées depuis la dernière image
+    lastTimestamp = timestamp;
+
+    if (!paused && loopWidth > 0) {
+      position -= PIXELS_PER_SECOND * delta;
+      if (position <= -loopWidth) position += loopWidth; // boucle exacte, sans saut
+      track.style.transform = `translateX(${position}px)`;
+    }
+
+    requestAnimationFrame(step);
+  }
+
+  requestAnimationFrame(step);
 }
 
 /* ------------------------------ Menu mobile ------------------------------ */
@@ -174,6 +240,15 @@ function setupRevealOnScroll() {
   }, { threshold: 0.15 });
 
   items.forEach(el => observer.observe(el));
+
+  // Filet de sécurité : si, pour une raison propre à un appareil ou un
+  // navigateur, l'apparition en fondu ne se déclenche jamais (ce qui
+  // laisserait le contenu invisible), on force son affichage après 2
+  // secondes. Mieux vaut un contenu visible sans effet qu'un contenu
+  // invisible.
+  setTimeout(() => {
+    items.forEach(el => el.classList.add("is-visible"));
+  }, 2000);
 }
 
 /* ------------------------------ Visionneuse plein écran (lightbox) ------------------------------
