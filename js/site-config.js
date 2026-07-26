@@ -7,38 +7,50 @@
    Ce fichier regroupe les petits choix que tu pourrais vouloir changer
    toi-même sans avoir à comprendre tout le reste du code.
 
-   IMAGE D'ACCUEIL (grande image du haut de la page)
+
+   PHOTO DE FOND DE LA PAGE D'ACCUEIL (remplit tout l'écran)
    -------------------------------------------------------------------------
-   Choisis laquelle des options ci-dessous doit s'afficher en changeant
-   la valeur de "heroImage" plus bas. Écris exactement l'un de ces mots,
-   entre guillemets :
+   Le logo (transparent) et les 4 icônes rondes s'affichent PAR-DESSUS
+   cette photo. Choisis quelle photo utiliser en changeant la valeur de
+   "heroBackground" plus bas :
 
-     "logo-seul"          → le logo actuel (ourson + texte + slogan)
-     "logo-avec-cookies"  → une version alternative avec une photo de
-                             biscuits (à ajouter toi-même, voir note
-                             ci-dessous)
+     "aucune"    → pas de photo, fond crème uni (comme avant)
+     "cookies"   → la photo de biscuits fournie
 
-   Pour ajouter la version "logo-avec-cookies" :
-     1. Dépose ton image dans le dossier images/ (ex: images/logo-hero-alt.jpg)
-     2. Remplace la ligne "logo-avec-cookies": "images/logo-hero.png"
-        juste en dessous par le nom de ton fichier
-     3. Change heroImage à "logo-avec-cookies"
+   Pour ajouter une NOUVELLE photo de fond :
+     1. Prépare une photo bien large (1600px de large minimum si possible,
+        format .jpg, poids idéal sous 400 Ko) — elle sera automatiquement
+        recadrée pour remplir tout l'écran, quelle que soit sa taille.
+        Évite les photos où l'élément important est tout en haut ou tout
+        en bas : privilégie un sujet plutôt centré, car les bords peuvent
+        être rognés selon la forme de l'écran (téléphone, ordinateur...).
+     2. Dépose le fichier dans le dossier images/
+     3. Ajoute une nouvelle ligne dans HERO_BACKGROUNDS ci-dessous, avec
+        un nom de ton choix, ex: "atelier": "images/hero-bg-atelier.jpg"
+     4. Change heroBackground pour ce nom, ex: heroBackground: "atelier"
 
-   Si le fichier choisi est introuvable, le site affiche automatiquement
-   le logo habituel à la place — impossible de "casser" la page d'accueil
-   avec ce réglage.
+   Si le fichier choisi est introuvable, le site revient automatiquement
+   au fond crème uni — impossible de "casser" la page d'accueil avec ce
+   réglage.
+
+
+   IMAGE DU LOGO AFFICHÉ (par-dessus la photo de fond)
+   -------------------------------------------------------------------------
+   "heroLogo" choisit quel fichier logo (transparent) est affiché :
+
+     "logo-seul"  → le logo actuel (ourson + texte + slogan), transparent
    ========================================================================= */
 
 const SITE_CONFIG = {
-  heroImage: "logo-avec-cookies",
+  heroBackground: "cookies",
+  heroLogo: "logo-seul",
 };
 
-const HERO_IMAGES = {
-  "logo-seul": "images/imageprincipale.jpg",
+const HERO_BACKGROUNDS = {
+  "aucune": null,
+  "cookies": "images/hero-bg-cookies.jpg",
+};
 
-  // ⚠️ Cette clé pointe pour l'instant vers la même image que "logo-seul"
-  // car je n'ai pas encore reçu la photo alternative avec les biscuits.
-  // Remplace la ligne du dessous par le chemin de ta nouvelle image dès
-  // que tu l'ajoutes dans le dossier images/.
-  "logo-avec-cookies": "images/imageprincipale.jpg",
+const HERO_LOGOS = {
+  "logo-seul": "images/logo-hero.png",
 };

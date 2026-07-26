@@ -31,16 +31,33 @@ function runSafely(fn) {
   }
 }
 
-/* ---------------------------- Image d'accueil ---------------------------- */
+/* ---------------------------- Photo de fond + logo du hero ---------------------------- */
 
 function setHeroImage() {
-  const img = document.getElementById("heroImage");
-  if (!img || typeof SITE_CONFIG === "undefined" || typeof HERO_IMAGES === "undefined") return;
+  if (typeof SITE_CONFIG === "undefined") return;
 
-  const chosen = HERO_IMAGES[SITE_CONFIG.heroImage];
-  if (chosen) {
-    img.onerror = () => { img.onerror = null; img.src = "images/logo-hero.png"; };
-    img.src = chosen;
+  // --- Photo de fond plein écran ---
+  const bgWrapper = document.getElementById("heroBg");
+  const bgImg = document.getElementById("heroBgImage");
+  if (bgWrapper && bgImg && typeof HERO_BACKGROUNDS !== "undefined") {
+    const bgChosen = HERO_BACKGROUNDS[SITE_CONFIG.heroBackground];
+    if (bgChosen) {
+      bgImg.onerror = () => { bgWrapper.classList.add("is-empty"); }; // fichier introuvable → revient au fond crème uni
+      bgImg.src = bgChosen;
+      bgWrapper.classList.remove("is-empty");
+    } else {
+      bgWrapper.classList.add("is-empty"); // "aucune" ou réglage invalide → fond crème uni
+    }
+  }
+
+  // --- Logo superposé (transparent) ---
+  const logoImg = document.getElementById("heroImage");
+  if (logoImg && typeof HERO_LOGOS !== "undefined") {
+    const logoChosen = HERO_LOGOS[SITE_CONFIG.heroLogo];
+    if (logoChosen) {
+      logoImg.onerror = () => { logoImg.onerror = null; logoImg.src = "images/logo-hero.png"; };
+      logoImg.src = logoChosen;
+    }
   }
 }
 
