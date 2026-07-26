@@ -48,7 +48,7 @@
      ========================================================================= -->
 <header class="site-header">
   <a href="#" class="brand">
-    <img src="images/logo-hero.png" alt="Un Monde à croquer — d'amour et de biscuits">
+    <img src="images/logo-header-creme.png" alt="Un Monde à croquer">
   </a>
   <!-- Bouton "hamburger" (3 lignes), visible seulement sur mobile -->
   <button class="nav-toggle" id="navToggle" aria-label="Ouvrir le menu" aria-expanded="false" aria-controls="siteNav">
@@ -76,10 +76,11 @@
   <section class="hero">
     <div class="hero-inner">
 
-      <!-- Logo principal. Pour le remplacer : change le fichier
-           images/logo-hero.png (même nom) ou change le nom ici. -->
+      <!-- Logo principal. L'image affichée est choisie automatiquement
+           d'après js/site-config.js (voir "heroImage") — ne change pas
+           le src ici, change plutôt le réglage dans site-config.js. -->
       <div class="hero-mascot">
-        <img src="images/logo-hero.png" alt="Un Monde à croquer — d'amour et de biscuits">
+        <img id="heroImage" src="images/logo-hero.png" alt="Un Monde à croquer — d'amour et de biscuits">
       </div>
 
       <!-- Titre invisible à l'écran, gardé pour le SEO/l'accessibilité
@@ -267,10 +268,11 @@
 
 <!-- =========================================================================
      SCRIPTS — ne pas modifier ni réordonner ces lignes.
-     Les 3 premiers fichiers contiennent le CONTENU modifiable (biscuits,
-     points de vente, photos du bandeau) ; main.js fait fonctionner le site
-     à partir de ce contenu.
+     Les 4 premiers fichiers contiennent le CONTENU modifiable (réglages
+     rapides, biscuits, points de vente, photos du bandeau) ; main.js fait
+     fonctionner le site à partir de ce contenu.
      ========================================================================= -->
+<script src="js/site-config.js"></script>
 <script src="js/cookies-data.js"></script>
 <script src="js/points-de-vente-data.js"></script>
 <script src="js/bandeau-data.js"></script>
