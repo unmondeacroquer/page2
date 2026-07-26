@@ -247,10 +247,9 @@ h3 {
   display: flex;
   align-items: center;
   justify-content: space-between;  /* logo à gauche, menu à droite */
-  padding: 14px 24px;              /* hauteur du bandeau — augmente pour un header plus haut */
-  background: rgba(247, 240, 223, 0.88); /* fond du header, légèrement transparent */
-  backdrop-filter: blur(8px);      /* flou derrière le header au défilement */
-  border-bottom: 1px solid rgba(107, 42, 49, 0.12);
+  padding: 18px 24px;              /* hauteur du bandeau (14px × 1,3 = header 30% plus haut) — augmente pour un header encore plus haut */
+  background: var(--maroon);       /* fond rouge du header */
+  border-bottom: 1px solid rgba(0,0,0,0.15);
 }
 
 .site-header .brand {
@@ -262,7 +261,7 @@ h3 {
 
 /* Taille du logo dans le header */
 .site-header .brand img {
-  height: 46px;    /* ← CHANGE CETTE VALEUR pour agrandir/rétrécir le logo du header */
+  height: 60px;    /* ← CHANGE CETTE VALEUR pour agrandir/rétrécir le logo du header (46px × 1,3 = +30%) */
   width: auto;     /* la largeur s'ajuste automatiquement, ne pas toucher */
   object-fit: contain;
 }
@@ -279,12 +278,12 @@ h3 {
   text-decoration: none;
   font-weight: 700;
   font-size: 0.92rem;   /* taille du texte des liens du menu */
-  color: var(--maroon);
+  color: var(--cream);  /* texte clair pour rester lisible sur le fond rouge du header */
   padding: 6px 2px;
   border-bottom: 2px solid transparent;
   transition: border-color 0.2s ease;
 }
-.site-nav a:hover { border-color: var(--terracotta); }
+.site-nav a:hover { border-color: var(--cream); }
 
 /* Bouton "hamburger" (3 lignes) affiché uniquement sur mobile */
 .nav-toggle {
@@ -299,7 +298,7 @@ h3 {
   width: 24px;
   height: 3px;
   margin: 5px 0;
-  background: var(--maroon);
+  background: var(--cream);  /* clair pour rester visible sur le fond rouge du header */
   border-radius: 3px;
 }
 
@@ -317,14 +316,14 @@ h3 {
 .hero-inner {
   position: relative;
   z-index: 2;
-  max-width: 820px;  /* largeur max du bloc central du hero — augmente si tu agrandis le logo */
+  max-width: 1025px;  /* largeur max du bloc central du hero — augmente si tu agrandis le logo */
   margin: 0 auto;
 }
 
 /* Conteneur du logo principal (grande image du haut) */
 .hero-mascot {
-  width: clamp(200px, 55vw, 780px); /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir le logo principal
-                                        (minimum, taille selon l'écran, maximum) */
+  width: clamp(250px, 69vw, 975px); /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir le logo principal
+                                        (minimum, taille selon l'écran, maximum) — valeurs actuelles = +25% */
   max-width: 100%;                  /* sécurité anti-débordement sur petits téléphones — ne pas retirer */
   margin: 0 auto 28px;              /* dernier chiffre = espace en dessous du logo */
 }
@@ -352,16 +351,16 @@ h3 {
   display: flex;
   justify-content: center;
   align-items: center;
-  flex-wrap: wrap;                /* passe à la ligne si l'écran est trop étroit pour les 4 */
-  gap: clamp(10px, 4vw, 40px);    /* espace entre les icônes */
+  flex-wrap: nowrap;               /* TOUJOURS sur une seule ligne, même sur petit écran (les icônes rétrécissent plutôt que de passer à la ligne) */
+  gap: clamp(8px, 3vw, 40px);      /* espace entre les icônes */
   list-style: none;
   margin: 0 0 32px;               /* dernier chiffre = espace en dessous de la rangée d'icônes */
   padding: 0;
 }
 
 .hero-icons img {
-  width: clamp(56px, 9vw, 110px);   /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir les icônes */
-  height: clamp(56px, 9vw, 110px);  /*   (garde les mêmes valeurs sur width et height pour rester rond) */
+  width: clamp(48px, 9vw, 110px);   /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir les icônes */
+  height: clamp(48px, 9vw, 110px);  /*   (garde les mêmes valeurs sur width et height pour rester rond) */
   object-fit: contain;
 }
 
@@ -394,11 +393,11 @@ h3 {
   display: flex;
   gap: 18px;               /* espace entre les photos — avant elles étaient collées, d'où l'effet "basique" */
   width: max-content;
-  animation: scroll-left 38s linear infinite; /* 38s = vitesse du défilement, augmente pour ralentir */
-}
-
-.bandeau-track.is-static {
-  animation: none;  /* désactivé automatiquement s'il n'y a qu'une seule photo */
+  will-change: transform;  /* indique au navigateur d'optimiser cet élément pour l'animation (plus fluide) */
+  /* Le défilement est piloté par js/main.js (fonction startBandeauAnimation),
+     pas par une animation CSS — c'est ce qui corrige le bug où le bandeau
+     restait figé sur certains téléphones/tablettes. Rien à modifier ici :
+     pour changer la vitesse, va dans js/main.js → PIXELS_PER_SECOND. */
 }
 
 .bandeau-item {
@@ -419,23 +418,6 @@ h3 {
   transition: transform 0.5s ease, filter 0.3s ease;
 }
 .bandeau-item:hover img { transform: scale(1.07); filter: brightness(1.05); }
-
-@keyframes scroll-left {
-  from { transform: translateX(0); }
-  /* La distance exacte du décalage (--bandeau-shift) est calculée en JS
-     dans js/main.js, car un simple "-50%" n'est plus assez précis depuis
-     qu'il y a un espacement (gap) entre les photos — 50% du double
-     contenu n'atterrit pas exactement au bon endroit avec un espacement.
-     Le "50%" ci-dessous n'est qu'une valeur de secours, remplacée en
-     pratique par la variable calculée avant même le premier affichage. */
-  to { transform: translateX(calc(-1 * var(--bandeau-shift, 50%))); }
-}
-
-.bandeau:hover .bandeau-track { animation-play-state: paused; } /* pause le défilement au survol de la souris */
-
-@media (prefers-reduced-motion: reduce) {
-  .bandeau-track { animation: none; } /* désactive l'animation pour les personnes sensibles au mouvement */
-}
 
 /* -------------------------------------------------------------------------
    Réglages génériques appliqués à toutes les sections du site
@@ -764,16 +746,16 @@ section { padding: var(--section-pad) 0; } /* espace vertical entre chaque grand
 /* Rangée des 3 petites icônes (amour / artisanal / sans gluten) en crème dans le footer */
 .footer-icons {
   display: flex;
-  flex-wrap: wrap;  /* passe à la ligne si l'écran est trop étroit pour les 4 icônes */
-  gap: 14px;   /* espace entre les icônes */
+  flex-wrap: nowrap;  /* TOUJOURS sur une seule ligne, même sur petit écran */
+  gap: 10px;   /* espace entre les icônes */
   list-style: none;
   margin: 0;
   padding: 0;
 }
 
 .footer-icons img {
-  width: 54px;    /* ← CHANGE CETTE VALEUR (et celle du dessous) pour agrandir/rétrécir les icônes du footer */
-  height: 54px;
+  width: clamp(38px, 9vw, 54px);    /* ← CHANGE CES VALEURS pour agrandir/rétrécir les icônes du footer */
+  height: clamp(38px, 9vw, 54px);
   object-fit: contain;
 }
 
@@ -843,7 +825,7 @@ section { padding: var(--section-pad) 0; } /* espace vertical entre chaque grand
 
   .site-nav {
     position: fixed;
-    top: 68px;
+    top: 98px;           /* doit correspondre à la hauteur du header — recalcule si tu changes le padding/logo du header */
     right: 0;
     left: 0;
     background: var(--cream);
@@ -855,6 +837,10 @@ section { padding: var(--section-pad) 0; } /* espace vertical entre chaque grand
     overflow: hidden;
     transition: max-height 0.3s ease;
     border-bottom: 1px solid rgba(107,42,49,0.12);
+  }
+
+  .site-nav a {
+    color: var(--maroon);  /* le menu déplié a un fond crème, donc texte foncé ici (contrairement au header rouge) */
   }
 
   .site-nav.is-open {
