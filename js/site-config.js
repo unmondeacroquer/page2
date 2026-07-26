@@ -34,11 +34,11 @@ const SITE_CONFIG = {
 };
 
 const HERO_IMAGES = {
-  "logo-seul": "images/logocokie.png",
+  "logo-seul": "images/imageprincipale.jpg",
 
   // ⚠️ Cette clé pointe pour l'instant vers la même image que "logo-seul"
   // car je n'ai pas encore reçu la photo alternative avec les biscuits.
   // Remplace la ligne du dessous par le chemin de ta nouvelle image dès
   // que tu l'ajoutes dans le dossier images/.
-  "logo-avec-cookies": "images/logo-hero.png",
+  "logo-avec-cookies": "images/imageprincipale.jpg",
 };
