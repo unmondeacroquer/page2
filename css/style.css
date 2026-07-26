@@ -313,7 +313,7 @@ h3 {
   justify-content: center;
   min-height: 100vh;    /* remplit toute la hauteur de l'écran */
   min-height: 100svh;   /* version plus fiable sur mobile (tient compte de la barre d'adresse) — les navigateurs qui ne la connaissent pas gardent la ligne du dessus */
-  padding: clamp(50px, 8vw, 90px) 24px; /* espace au-dessus/en dessous du contenu */
+  padding: clamp(0px, 0vw, 90px) 24px; /* espace au-dessus/en dessous du contenu */
   text-align: center;
   background: linear-gradient(180deg, var(--cream) 0%, var(--cream) 60%, var(--cream-deep) 100%); /* visible seulement si aucune photo de fond n'est choisie dans site-config.js */
 }
