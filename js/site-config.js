@@ -48,7 +48,7 @@ const SITE_CONFIG = {
 
 const HERO_BACKGROUNDS = {
   "aucune": null,
-  "cookies": "images/hero-bg-cookies.jpg",
+  "cookies": "images/cookieprincipal.jpg",
 };
 
 const HERO_LOGOS = {
