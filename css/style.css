@@ -308,10 +308,49 @@ h3 {
 .hero {
   position: relative;
   overflow: hidden;
-  padding: clamp(50px, 8vw, 90px) 24px clamp(90px, 12vw, 150px); /* espace au-dessus/en dessous du contenu */
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;    /* remplit toute la hauteur de l'écran */
+  min-height: 100svh;   /* version plus fiable sur mobile (tient compte de la barre d'adresse) — les navigateurs qui ne la connaissent pas gardent la ligne du dessus */
+  padding: clamp(50px, 8vw, 90px) 24px; /* espace au-dessus/en dessous du contenu */
   text-align: center;
-  background: linear-gradient(180deg, var(--cream) 0%, var(--cream) 60%, var(--cream-deep) 100%);
+  background: linear-gradient(180deg, var(--cream) 0%, var(--cream) 60%, var(--cream-deep) 100%); /* visible seulement si aucune photo de fond n'est choisie dans site-config.js */
 }
+
+/* Photo de fond plein écran. object-fit: cover = la photo remplit tout
+   l'espace disponible sans jamais se déformer, en rognant si besoin —
+   elle reste "pleine grandeur" quelle que soit la taille de la fenêtre
+   ou le zoom du texte, car elle est positionnée en pourcentages (inset:0)
+   et non liée à la taille du texte. */
+.hero-bg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  overflow: hidden;
+}
+
+.hero-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;       /* remplit tout l'écran sans déformer la photo */
+  object-position: center; /* centre la photo dans le cadre */
+}
+
+/* Léger voile crème par-dessus la photo, pour que le logo et le bouton
+   restent bien lisibles peu importe la photo choisie. Retire ce bloc
+   (ou baisse les chiffres après la virgule dans rgba, entre 0 et 1)
+   si tu préfères une photo plus franche, sans voile. */
+.hero-bg::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(180deg, rgba(237,232,213,0.25) 0%, rgba(237,232,213,0.6) 100%);
+}
+
+/* Si aucune photo de fond n'est choisie dans site-config.js (valeur
+   "aucune"), la couche .hero-bg reste vide/cachée — voir js/main.js */
+.hero-bg.is-empty { display: none; }
 
 .hero-inner {
   position: relative;
