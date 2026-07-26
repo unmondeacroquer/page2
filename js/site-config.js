@@ -30,11 +30,11 @@
    ========================================================================= */
 
 const SITE_CONFIG = {
-  heroImage: "logo-seul",
+  heroImage: "logo-avec-cookies",
 };
 
 const HERO_IMAGES = {
-  "logo-seul": "images/logo-hero.png",
+  "logo-seul": "images/logocokie.png",
 
   // ⚠️ Cette clé pointe pour l'instant vers la même image que "logo-seul"
   // car je n'ai pas encore reçu la photo alternative avec les biscuits.
