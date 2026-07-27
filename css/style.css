@@ -277,7 +277,7 @@ h3 {
 .site-nav a {
   text-decoration: none;
   font-weight: 700;
-  font-size: 1.80rem;   /* taille du texte des liens du menu */
+  font-size: 1.3rem;   /* taille du texte des liens du menu */
   color: var(--cream);  /* texte clair pour rester lisible sur le fond rouge du header */
   padding: 6px 2px;
   border-bottom: 2px solid transparent;
