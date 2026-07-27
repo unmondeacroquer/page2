@@ -309,7 +309,7 @@ h3 {
   position: relative;
   overflow: hidden;
   display: flex;
-  align-items: center;
+  //align-items: center;
   justify-content: center;
   min-height: 100vh;    /* remplit toute la hauteur de l'écran */
   min-height: 100svh;   /* version plus fiable sur mobile (tient compte de la barre d'adresse) — les navigateurs qui ne la connaissent pas gardent la ligne du dessus */
