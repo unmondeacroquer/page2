@@ -365,7 +365,7 @@ h3 {
   transform: translateY(-100px); 
   transition: transform 0.3s ease;
    
-   width: clamp(250px, 69vw, 975px); /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir le logo principal
+   width: clamp(250px, 80vw, 1100px); /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir le logo principal
                                         (minimum, taille selon l'écran, maximum) — valeurs actuelles = +25% */
   max-width: 100%;                  /* sécurité anti-débordement sur petits téléphones — ne pas retirer */
   margin: 0 auto 28px;              /* dernier chiffre = espace en dessous du logo */
@@ -399,11 +399,13 @@ h3 {
   list-style: none;
   margin: 0 0 32px;               /* dernier chiffre = espace en dessous de la rangée d'icônes */
   padding: 0;
+   transform: translateY(-100px); 
+  transition: transform 0.3s ease;
 }
 
 .hero-icons img {
-  width: clamp(48px, 9vw, 110px);   /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir les icônes */
-  height: clamp(48px, 9vw, 110px);  /*   (garde les mêmes valeurs sur width et height pour rester rond) */
+  width: clamp(48px, 15vw, 150px);   /* ← CHANGE CES 3 VALEURS pour agrandir/rétrécir les icônes */
+  height: clamp(48px, 15vw, 150px);  /*   (garde les mêmes valeurs sur width et height pour rester rond) */
   object-fit: contain;
 }
 
